@@ -1,0 +1,68 @@
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 20px;
+    border: 1px solid grey;
+    background-color: white;
+    width: 40%;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 15px 10px;
+}
+
+form .title {
+    display: flex;
+    color: #828282;
+    background-color: white;
+    font-size: 25px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+form label {
+    color: #828282;
+    background-color: white;
+   
+}
+
+form input {
+    width: 100%;
+    background-color: white;
+    border: 1px solid  #828282;
+    border-radius: 5px;
+    color: black;
+}
+
+form .checkbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    background-color: white;
+}
+
+form .checkbox input {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 1px solid  #828282;
+    border-radius: 5px;
+    color: black;
+}
+
+form .checkbox label {
+    color: #828282;
+    background-color: white;
+    margin-left: 10px;
+}
+
+form .botonregister {
+    color: white;
+    background: #0F7597;
+    border-radius: 12px;
+}
