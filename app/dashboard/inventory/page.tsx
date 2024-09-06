@@ -8,6 +8,8 @@ export const metadata: Metadata= {
 
 export default function inventory(){
     return (
-        <div>This is the inventory page</div>
+        <form action="">
+        
+      </form>
     );
 }
