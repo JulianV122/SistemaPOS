@@ -1,4 +1,4 @@
-import CashierNavbar from "../components/CashierNavbar"
+import { CashierNavbar } from "@/components";
 export default function CashierLayout({
     children
 }:
