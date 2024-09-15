@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 import { tdStyle } from "../tokens";
 
 type TdProps = {
-    content: ReactNode;
+    children: ReactNode;
 }
 
-export function Td({content}: TdProps) {
+export function Td({children}: TdProps) {
     return (
-        <td className={tdStyle}>{content}</td>
+        <td className={tdStyle}>{children}</td>
     )
 }
