@@ -1,12 +1,15 @@
 import React from 'react'
 
-import './CashierNavbar.css'
+
+import { navbarStyles } from '../tokens'
+
+import { ButtonSecondary } from '@/components'
 
 export function CashierNavbar() {
     return (
         <div>
-            <nav className='cashier-navbar'>
-                <div className='left-data'>
+            <nav className={`${navbarStyles}`}>
+                <div className='flex gap-4'>
                     <div>
                         <p><strong>Pepito Pérez</strong></p>
                         <span>Cajero</span>
@@ -15,7 +18,7 @@ export function CashierNavbar() {
                     <p><strong>Código caja:</strong> 024128</p>
                 </div>
                 <div>
-                    <a href="" className='logout-button'>Salir</a>
+                    <ButtonSecondary text='Pepepepepepepe'/>
                 </div>
             </nav>
         </div>
