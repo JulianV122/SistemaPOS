@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { tdStyle } from "../tokens";
 
 type TdProps = {
     content: ReactNode;
@@ -6,6 +7,6 @@ type TdProps = {
 
 export function Td({content}: TdProps) {
     return (
-        <td className="px-4 py-2 border-b text-black text-center">{content}</td>
+        <td className={tdStyle}>{content}</td>
     )
 }
