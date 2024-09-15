@@ -3,13 +3,13 @@ import { ButtonWithIcon } from "@/components";
 import { buttonSecondary } from '../tokens';
 
 
-export function Dashboard() {
+export function NavDashboard() {
     return (
         <aside className= "w-64 flex flex-col bg-slate-800">
             <div className="flex-grow p-4">
                 <div className="mb-8">
                     <br />
-                    <h2 className="text-xl font-bold mb-4 text-center">LOGO</h2>
+                    <h2 className="text-xl font-bold mb-4 text-center">POSCO.</h2>
                     <br />
                     <ul>
                         <li className="mb-4">

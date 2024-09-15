@@ -1,5 +1,4 @@
 
-
 import { buttonPrimary } from "../tokens"
 
 type ButtonPrimaryProps = {
