@@ -1,6 +1,7 @@
 import { Tr } from "@/components";
 import { Th, Td } from "@/components";
 import { buttonTable } from "@/components/tokens";
+import { ButtonEdit, ButtonDelete } from "@/components";
 
 import Link from "next/link";
 
@@ -52,8 +53,8 @@ export function EmployeesTable() {
                         <Td>{employee.phone}</Td>
                         <Td>
                             <Link href={`/dashboard/manage/${employee.id}`} className={`text-white bg-violet-700 hover:bg-violet-800 ${buttonTable}`}>Detalle</Link>
-                            <button className={`text-white bg-blue-700 hover:bg-blue-800 ${buttonTable}`}>Editar</button>
-                            <button className={`text-white bg-red-700 hover:bg-red-800 ${buttonTable}`}>Eliminar</button>
+                           <ButtonEdit></ButtonEdit>
+                           <ButtonDelete></ButtonDelete>
                         </Td>
                     </Tr>
                 ))}
