@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
+import Link from 'next/link';
 
 export function LoginForm() {
     interface Errors {
@@ -74,7 +75,7 @@ export function LoginForm() {
                     {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <ButtonPrimary text="Ingresar" />
+                    <Link href='/dashboard'><ButtonPrimary text="Ingresar" /></Link>
                 </div>
             </form>
         </div>
