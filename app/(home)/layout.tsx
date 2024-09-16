@@ -1,3 +1,4 @@
+import { HomeNavbar, HomeFooter } from "@/components";
 export default function HomeLayout({
     children,
 }: {
@@ -5,7 +6,9 @@ export default function HomeLayout({
 }) {
     return (
         <div className="w-screen h-screen bg-white">
-            {children}
+            <HomeNavbar />
+            {children}  
+            <HomeFooter />
         </div>
     );
 }
