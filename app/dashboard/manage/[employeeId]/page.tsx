@@ -11,7 +11,7 @@ export default function employee() {
     return (
         <div className="text-center">
             <h1 className="text-black  bold text-3xl font-bold m-4">Employee {employeeId}</h1>
-            <Link href={'dashboard/manage'}>Pepito</Link>
+            <Link href={'./'}><ButtonPrimary text="Volver"/></Link>
         </div>
     )
 }
