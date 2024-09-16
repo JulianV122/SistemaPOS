@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation'; 
 
 export function LoginForm() {
     interface Errors {
@@ -14,7 +14,8 @@ export function LoginForm() {
     const [password, setPassword] = useState<string>('');
     const [errors, setErrors] = useState<Errors>({ email: '', password: '' });
 
-    // Validar si el campo está vacío
+    const router = useRouter(); 
+
     const validateEmptyFields = () => {
         let errors: Errors = { email: '', password: '' };
         let isValid = true;
@@ -38,8 +39,9 @@ export function LoginForm() {
         const isValid = validateEmptyFields();
 
         if (isValid) {
-            // Lógica de envío del formulario
-            console.log('Formulario enviado', { email, password });
+            router.push('/dashboard');
+        } else {
+            console.log('Errores en el formulario', errors);
         }
     };
 
@@ -75,7 +77,7 @@ export function LoginForm() {
                     {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <Link href='/dashboard'><ButtonPrimary text="Ingresar" /></Link>
+                    <ButtonPrimary text="Ingresar" />
                 </div>
             </form>
         </div>
