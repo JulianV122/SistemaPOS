@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; 
 import { ButtonPrimary } from '@/components';
-import Link from 'next/link';
 
 export function RegisterForm() {
     interface Errors {
@@ -26,13 +26,13 @@ export function RegisterForm() {
         terms: ''
     });
 
-    // Validar si el correo es válido
+    const router = useRouter(); 
+
     const validateEmail = (email: string): boolean => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     };
 
-    // Validar si los campos están vacíos
     const validateForm = () => {
         let isValid = true;
         let errors: Errors = {
@@ -77,8 +77,9 @@ export function RegisterForm() {
         const isValid = validateForm();
 
         if (isValid) {
-            // Lógica de envío del formulario
             console.log('Formulario enviado', { name, email, password, termsAccepted });
+            
+            router.push('/login');
         }
     };
 
@@ -156,7 +157,7 @@ export function RegisterForm() {
                     {errors.terms && <p className="text-red-500 text-xs italic">{errors.terms}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <Link href='/login'><ButtonPrimary text="Registrarse" /></Link>
+                    <ButtonPrimary text="Registrarse" />
                 </div>
             </form>
         </div>
