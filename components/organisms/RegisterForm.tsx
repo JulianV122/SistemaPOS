@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
+import Link from 'next/link';
 
 export function RegisterForm() {
     interface Errors {
@@ -155,7 +156,7 @@ export function RegisterForm() {
                     {errors.terms && <p className="text-red-500 text-xs italic">{errors.terms}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <ButtonPrimary text="Registrarse" />
+                    <Link href='/login'><ButtonPrimary text="Registrarse" /></Link>
                 </div>
             </form>
         </div>
