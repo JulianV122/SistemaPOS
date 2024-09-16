@@ -5,7 +5,7 @@ export default function HomeLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="w-screen h-screen bg-white">
+        <div className="w-auto min-h-screen bg-white flex flex-col justify-between">
             <HomeNavbar />
             {children}  
             <HomeFooter />
