@@ -4,50 +4,32 @@ import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from 'next/navigation'; 
 
-export function LoginForm() {
-    interface Errors {
-        email: string;
-        password: string;
-    }
+import { useForm, SubmitHandler } from "react-hook-form"
 
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [errors, setErrors] = useState<Errors>({ email: '', password: '' });
+type Inputs = {
+    email: string,
+    password: string
+}
+
+export function LoginForm() {
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm<Inputs>()
+    
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log(data);
+        router.push('/dashboard');
+    }
 
     const router = useRouter(); 
 
-    const validateEmptyFields = () => {
-        let errors: Errors = { email: '', password: '' };
-        let isValid = true;
-
-        if (email.trim() === '') {
-            errors.email = 'El campo de correo electrónico no puede estar vacío.';
-            isValid = false;
-        }
-
-        if (password.trim() === '') {
-            errors.password = 'El campo de contraseña no puede estar vacío.';
-            isValid = false;
-        }
-
-        setErrors(errors);
-        return isValid;
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const isValid = validateEmptyFields();
-
-        if (isValid) {
-            router.push('/dashboard');
-        } else {
-            console.log('Errores en el formulario', errors);
-        }
-    };
-
     return (
         <div className="w-full max-w-xl">
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Correo Electrónico
@@ -57,10 +39,9 @@ export function LoginForm() {
                         id="email"
                         type="email"
                         placeholder="Correo electrónico"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        {...register("email", { required: true })}
                     />
-                    {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}                  
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
@@ -71,14 +52,14 @@ export function LoginForm() {
                         id="password"
                         type="password"
                         placeholder="Contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        {...register("password", { required:true })}
                     />
-                    {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
-                </div>
+                {errors.password && <p className="text-red-500 text-xs italic"> El campo contraseña es invalido </p>}
+                </div>  
                 <div className="w-full flex justify-center">
                     <ButtonPrimary text="Ingresar" />
                 </div>
+                <input type="submit"/>
             </form>
         </div>
     );
