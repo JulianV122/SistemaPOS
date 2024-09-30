@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { ButtonPrimary } from '@/components';
-
+import { DevTool } from "@hookform/devtools";
 import { useForm, SubmitHandler } from "react-hook-form"
+import { registerUser } from '@/services/auth';
 
 type Inputs = {
     name: string;
@@ -21,14 +22,16 @@ export function RegisterForm() {
         handleSubmit,
         watch,
         formState: { errors },
-      } = useForm<Inputs>()
-    
+        control
+    } = useForm<Inputs>()
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
+        registerUser(data.email, data.password);
         router.push('/login');
     }
 
-    const router = useRouter(); 
+    const router = useRouter();
 
     return (
         <div className="w-full max-w-xl">
@@ -103,6 +106,7 @@ export function RegisterForm() {
                 </div>
                 <input type="submit" />
             </form>
+            <DevTool control={control} />
         </div>
     );
 }

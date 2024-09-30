@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
-import { useRouter } from 'next/navigation'; 
-
+import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from "react-hook-form"
+import { loginUser } from '@/services/auth';
 
 type Inputs = {
     email: string,
@@ -18,10 +18,12 @@ export function LoginForm() {
         handleSubmit,
         watch,
         formState: { errors },
+        control
       } = useForm<Inputs>()
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
+        loginUser(data.email, data.password);
         router.push('/dashboard');
     }
 
