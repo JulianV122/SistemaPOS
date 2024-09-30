@@ -55,7 +55,13 @@ export function RegisterForm() {
                         id="email"
                         type="email"
                         placeholder="Correo electrónico"
-                        {...register("email", { required: true })}
+                        {...register("email", {
+                            required: "Este campo es requerido",
+                            pattern: {
+                              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                              message: "El formato del correo electrónico no es válido"
+                            }
+                        })}
                     />
                     {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
                 </div>
