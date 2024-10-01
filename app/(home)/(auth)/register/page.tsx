@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { RegisterForm } from '@/components';
+import { Register } from '@/components';
 
 export const metadata: Metadata = {
   title: "Register to Market Management",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function register() {
   return (
     <div className="register">
-        <RegisterForm />
+        <Register />
     </div>
   )
 }

@@ -5,13 +5,16 @@ import { ButtonPrimary } from '@/components';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { loginUser } from '@/services/auth';
+import { DevTool } from "@hookform/devtools";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema } from '@/validators/loginSchema';
 
 type Inputs = {
     email: string,
     password: string
 }
 
-export function LoginForm() {
+export function Login() {
 
     const {
         register,
@@ -19,7 +22,9 @@ export function LoginForm() {
         watch,
         formState: { errors },
         control
-      } = useForm<Inputs>()
+      } = useForm<Inputs>({
+        resolver: zodResolver(loginSchema)
+      })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
@@ -43,13 +48,9 @@ export function LoginForm() {
                         placeholder="Correo electrónico"
                         {...register("email", {
                             required: "Este campo es requerido",
-                            pattern: {
-                              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                              message: "El formato del correo electrónico no es válido"
-                            }
                         })}
                     />
-                {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}                  
+                {errors.email &&  <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}                  
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
@@ -69,6 +70,7 @@ export function LoginForm() {
                 </div>
                 <input type="submit"/>
             </form>
+            <DevTool control={control} />
         </div>
     );
 }

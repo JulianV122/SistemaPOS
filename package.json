@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@primer/octicons-react": "^19.11.0",
     "firebase": "^10.13.2",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.53.0"
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",

@@ -6,6 +6,8 @@ import { ButtonPrimary } from '@/components';
 import { DevTool } from "@hookform/devtools";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { registerUser } from '@/services/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema } from '@/validators/registerSchema';
 
 type Inputs = {
     name: string;
@@ -15,7 +17,7 @@ type Inputs = {
     terms: string;
 }
 
-export function RegisterForm() {
+export function Register() {
 
     const {
         register,
@@ -23,7 +25,9 @@ export function RegisterForm() {
         watch,
         formState: { errors },
         control
-    } = useForm<Inputs>()
+    } = useForm<Inputs>({
+        resolver: zodResolver(registerSchema)
+    })
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
@@ -59,11 +63,7 @@ export function RegisterForm() {
                         type="email"
                         placeholder="Correo electrónico"
                         {...register("email", {
-                            required: "Este campo es requerido",
-                            pattern: {
-                              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                              message: "El formato del correo electrónico no es válido"
-                            }
+                            required: "Este campo es requerido"
                         })}
                     />
                     {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
