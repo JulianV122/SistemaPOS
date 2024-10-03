@@ -26,9 +26,15 @@ export function Login() {
         resolver: zodResolver(loginSchema)
       })
     
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
-        loginUser(data.email, data.password);
+        const response = await loginUser(data.email, data.password);
+        console.log(response);
+
+        if (response.code === 'auth/invalid-credential') {
+            alert('Usuario no encontrado');
+            return;
+        }
         router.push('/dashboard');
     }
 

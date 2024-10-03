@@ -11,7 +11,9 @@ import { registerSchema } from '@/validators/registerSchema';
 
 type Inputs = {
     name: string;
+    lastname: string;
     email: string;
+    telephone: string;
     password: string;
     repeatPassword: string;
     terms: string;
@@ -31,7 +33,7 @@ export function Register() {
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
-        registerUser(data.email, data.password);
+        registerUser(data.email, data.password, data.name, data.lastname, data.telephone);
         router.push('/login');
     }
 
@@ -42,16 +44,29 @@ export function Register() {
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                        Nombre Completo
+                        Nombre
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.name ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="name"
                         type="text"
-                        placeholder="Nombre completo"
+                        placeholder="Nombre"
                         {...register("name", { required: true })}
                     />
-                    {errors.name && <p className="text-red-500 text-xs italic"> El campo nombre completo es invalido </p>}
+                    {errors.name && <p className="text-red-500 text-xs italic"> El campo nombre es invalido </p>}
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastname">
+                        Apellido
+                    </label>
+                    <input
+                        className={`shadow appearance-none border ${errors.lastname ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                        id="lastname"
+                        type="text"
+                        placeholder="Apellido"
+                        {...register("lastname", { required: true })}
+                    />
+                    {errors.lastname && <p className="text-red-500 text-xs italic"> El campo apellido es invalido </p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -67,6 +82,19 @@ export function Register() {
                         })}
                     />
                     {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="telephone">
+                        Teléfono
+                    </label>
+                    <input
+                        className={`shadow appearance-none border ${errors.telephone ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                        id="telephone"
+                        type="text"
+                        placeholder="Teléfono"
+                        {...register("telephone", { required: true })}
+                    />
+                    {errors.telephone && <p className="text-red-500 text-xs italic"> El campo teléfono es invalido </p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
