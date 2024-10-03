@@ -1,13 +1,24 @@
+'use client';
+
 import { Metadata } from "next";
 import { FormProfile } from "@/components";
+import { getCurrentUser } from "@/services/auth";
+import { useEffect, useState } from "react";
 
-export const metadata: Metadata = {
-    title: "My Profile",
-    description: "The user sees his profile here",
-}
 
 
 export default function profile() {
+    const [user, setUser] = useState<any>(null);
+    useEffect(() => {
+        const getUser = async () => {
+            const user = await getCurrentUser();
+            setUser(user);
+            console.log(user);
+        }
+        getUser();
+    }, []);
+    
+
     return (
         <div className="p-4 ">
             <div className="">
@@ -23,14 +34,14 @@ export default function profile() {
                                 <span className="text-4xl">👤</span>
                             </div>
                             <div className="text-center">
-                                <h3 className="text-xl font-semibold text-gray-600">Juan Pérez</h3>
-                                <p className="text-gray-600">juan@gmail.com</p>
-                                <p className="text-gray-600">312-691-3146</p>
+                                <h3 className="text-xl font-semibold text-gray-600">{user?.name} {user?.lastname}</h3>
+                                <p className="text-gray-600">{user?.email}</p>
+                                <p className="text-gray-600">{user?.telephone}</p>
                             </div>
                         </div>
                     </div>
                     <div className="col-span-1 ">
-                        <FormProfile/>
+                        <FormProfile name={user?.name} lastname={user?.lastname} telephone={user?.telephone}/>
                     </div>
                 </div>
             </div>
