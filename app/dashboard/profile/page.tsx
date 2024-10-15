@@ -1,23 +1,14 @@
 'use client';
 
-import { Metadata } from "next";
 import { FormProfile } from "@/components";
-import { getCurrentUser } from "@/services/auth";
-import { useEffect, useState } from "react";
+import { useUserSession } from "@/store/userSession";
 
 
 
 export default function profile() {
-    const [user, setUser] = useState<any>(null);
-    useEffect(() => {
-        const getUser = async () => {
-            const user = await getCurrentUser();
-            setUser(user);
-            console.log(user);
-        }
-        getUser();
-    }, []);
+    const { user } = useUserSession();
     
+
 
     return (
         <div className="p-4 ">
@@ -41,7 +32,9 @@ export default function profile() {
                         </div>
                     </div>
                     <div className="col-span-1 ">
-                        <FormProfile name={user?.name} lastname={user?.lastname} telephone={user?.telephone}/>
+                        {user && (
+                            <FormProfile name={user?.name} lastname={user?.lastname} telephone={user?.telephone}/>
+                        )}
                     </div>
                 </div>
             </div>

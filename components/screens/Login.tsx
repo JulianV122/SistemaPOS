@@ -4,17 +4,20 @@ import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from "react-hook-form"
-import { loginUser } from '@/services/auth';
+import { loginUser, getCurrentUser } from '@/services/auth';
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/validators/loginSchema';
+import { useUserSession } from '@/store/userSession';
 
 type Inputs = {
     email: string,
     password: string
 }
 
+
 export function Login() {
+    const { setUser } = useUserSession();
 
     const {
         register,
@@ -22,23 +25,37 @@ export function Login() {
         watch,
         formState: { errors },
         control
-      } = useForm<Inputs>({
+    } = useForm<Inputs>({
         resolver: zodResolver(loginSchema)
-      })
-    
+    })
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
         const response = await loginUser(data.email, data.password);
-        console.log(response);
+
 
         if (response.code === 'auth/invalid-credential') {
             alert('Usuario no encontrado');
             return;
         }
+
+        const user = await getCurrentUser();
+        console.log(user);
+
+        if (user) {
+            setUser({
+                id: user.uid,
+                email: user.email,
+                name: user.name,
+                lastname: user.lastname,
+                telephone: user.telephone,
+            });
+        }
+
         router.push('/dashboard');
     }
 
-    const router = useRouter(); 
+    const router = useRouter();
 
     return (
         <div className="w-full max-w-xl">
@@ -56,7 +73,7 @@ export function Login() {
                             required: "Este campo es requerido",
                         })}
                     />
-                {errors.email &&  <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}                  
+                    {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
@@ -67,14 +84,14 @@ export function Login() {
                         id="password"
                         type="password"
                         placeholder="Contraseña"
-                        {...register("password", { required:true })}
+                        {...register("password", { required: true })}
                     />
-                {errors.password && <p className="text-red-500 text-xs italic"> El campo contraseña es invalido </p>}
-                </div>  
+                    {errors.password && <p className="text-red-500 text-xs italic"> El campo contraseña es invalido </p>}
+                </div>
                 <div className="w-full flex justify-center">
                     <ButtonPrimary text="Ingresar" />
                 </div>
-                <input type="submit"/>
+                <input type="submit" />
             </form>
             <DevTool control={control} />
         </div>
