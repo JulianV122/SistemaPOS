@@ -6,6 +6,9 @@ type User = {
     lastname: string;
     name: string;
     telephone: string;
+    role: string;
+    roleDescription: string;
+    permissions: string[];
 }
 
 type UserSessionStore = {

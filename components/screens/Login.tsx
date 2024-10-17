@@ -40,15 +40,17 @@ export function Login() {
         }
 
         const user = await getCurrentUser();
-        console.log(user);
 
         if (user) {
             setUser({
                 id: user.uid,
-                email: user.email,
+                email: user.email ?? '',
                 name: user.name,
                 lastname: user.lastname,
                 telephone: user.telephone,
+                role: user.role.name,
+                roleDescription: user.role.description,
+                permissions: user.role.permissions
             });
         }
 
