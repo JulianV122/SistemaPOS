@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { EmployeesTable } from "@/components";
 import { ButtonSecondary } from "@/components";
+import { PermissionAuth } from "@/components"; 
 
 export const metadata: Metadata = {
     title: "Manage the employees",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function manage() {
     return (
+        <PermissionAuth requiredPermission="GESTIONAR_EMPLEADOS"> 
         <div className="p-4">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-3xl font-bold text-black">Gestionar empleados</h1>
@@ -26,7 +28,6 @@ export default function manage() {
                 </div>
             </div>
         </div>
-
-
+        </PermissionAuth>
     );
 }

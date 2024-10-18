@@ -1,4 +1,5 @@
 import { CashierNavbar } from "@/components";
+import { UserAuth } from '@/components';
 export default function CashierLayout({
     children
 }:
@@ -8,8 +9,10 @@ export default function CashierLayout({
 ) {
     return (
         <>
-            <CashierNavbar/>
-            { children }
+            <UserAuth>
+                <CashierNavbar/>
+                {children}
+            </UserAuth>
         </>
     )
 }

@@ -1,5 +1,7 @@
+'use client'
 import { NavDashboard } from "@/components";
 import { HeaderDashboard } from "@/components";
+import { UserAuth } from '@/components'; 
 
 export default function DashboardLayout({
     children
@@ -7,6 +9,7 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
+        <UserAuth>
         <div className="flex h-screen">            
             <NavDashboard/>
             <div className="flex-grow bg-gray-100">
@@ -16,6 +19,7 @@ export default function DashboardLayout({
                 </div>
             </div>
         </div>
+        </UserAuth>
     );
 }
 
