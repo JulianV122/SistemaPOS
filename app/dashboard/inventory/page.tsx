@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { PermissionAuth } from "@/components"; 
+
 
 export const metadata: Metadata= {
     title: "Manage the inventory",
@@ -8,8 +10,10 @@ export const metadata: Metadata= {
 
 export default function inventory(){
     return (
-        <form action="">
-        
-      </form>
+        <PermissionAuth requiredPermission="GESTIONAR_INVENTARIO"> 
+            <form action="">
+
+            </form>
+        </PermissionAuth>
     );
 }
