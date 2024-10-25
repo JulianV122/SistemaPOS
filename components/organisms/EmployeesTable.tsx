@@ -1,9 +1,7 @@
-import { Tr } from "@/components";
-import { Th, Td } from "@/components";
+import { Tr, Th, Td, ButtonEdit, ButtonDelete } from "@/components";
 import { buttonTable } from "@/components/tokens";
-import { ButtonEdit, ButtonDelete } from "@/components";
-
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const employeesData = [
     {
@@ -27,20 +25,21 @@ const employeesData = [
         email: 'maria@gmail.com',
         phone: '312-123-1456'
     },
-]
-
+];
 
 export function EmployeesTable() {
+    const t = useTranslations('EmployeesTable');
+
     return (
         <table className="min-w-full bg-white border border-gray-200">
             <thead>
                 <tr className="bg-black">
-                    <Th text="CÓDIGO"></Th>
-                    <Th text="NOMBRE"></Th>
-                    <Th text="APELLIDO"></Th>
-                    <Th text="EMAIL"></Th>
-                    <Th text="TELÉFONO"></Th>
-                    <Th text="ACCIONES"></Th>
+                    <Th text={t('header.code')}></Th>
+                    <Th text={t('header.name')}></Th>
+                    <Th text={t('header.lastName')}></Th>
+                    <Th text={t('header.email')}></Th>
+                    <Th text={t('header.phone')}></Th>
+                    <Th text={t('header.actions')}></Th>
                 </tr>
             </thead>
             <tbody>
@@ -52,14 +51,13 @@ export function EmployeesTable() {
                         <Td>{employee.email}</Td>
                         <Td>{employee.phone}</Td>
                         <Td>
-                            <Link href={`/dashboard/manage/${employee.id}`} className={`text-white bg-violet-700 hover:bg-violet-800 ${buttonTable}`}>Detalle</Link>
-                           <ButtonEdit></ButtonEdit>
-                           <ButtonDelete></ButtonDelete>
+                            <Link href={`/dashboard/manage/${employee.id}`} className={`text-white bg-violet-700 hover:bg-violet-800 ${buttonTable}`}>{t('detail')}</Link>
+                            <ButtonEdit />
+                            <ButtonDelete />
                         </Td>
                     </Tr>
                 ))}
             </tbody>
         </table>
-    )
+    );
 }
-

@@ -1,5 +1,6 @@
-import React from 'react'
-import { ButtonPrimary } from '../atoms/ButtonPrimary'
+import React from 'react';
+import { ButtonPrimary } from '../atoms/ButtonPrimary';
+import { useTranslations } from 'next-intl';
 
 type ServiceCardProps = {
     title: string,
@@ -7,19 +8,20 @@ type ServiceCardProps = {
     price: number
 }
 
+export function ServiceCard({ title, description, price }: ServiceCardProps) {
+    const t = useTranslations('ServiceCard');
 
-export function ServiceCard({title, description, price}: ServiceCardProps) {
     return (
         <article className="max-w-xs rounded overflow-hidden shadow-lg m-4">
             <div className="px-4 py-16 flex flex-col items-center">
                 <div className="font-bold text-3xl mb-4">{title}</div>
                 <p className="text-gray-700 text-center">{description}</p>
                 <div className="flex items-end mt-8 mb-8">
-                    <p className="font-light">COP$</p>
+                    <p className="font-light">{t('currency')}</p>
                     <h1 className="font-bold text-6xl">{price}</h1>
-                    <p className="font-light">/mes</p>
+                    <p className="font-light">{t('perMonth')}</p>
                 </div>
-                <ButtonPrimary text="Contratar" />
+                <ButtonPrimary text={t('hire')} />
             </div>
         </article>
     )

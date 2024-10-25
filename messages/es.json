@@ -1,0 +1,136 @@
+{
+    "LandingPage": {
+        "subtitle": "Sistemas POS para todo tipo de supermercados y tiendas",
+        "welcome": "Bienvenido a POSCO",
+        "description": "POSCO se especializa en la venta de sistemas POS (Point of Sale). Ofrecemos un servicio SASS con diferentes planes adaptados a las necesidades de supermercados y tiendas de todos los tamaños.",
+        "servicePlans": "Planes de Servicio",
+        "basicPlan": {
+            "title": "Plan Básico",
+            "description": "Ideal para pequeñas tiendas."
+        },
+        "intermediatePlan": {
+            "title": "Plan Intermedio",
+            "description": "Perfecto para supermercados medianos."
+        },
+        "advancedPlan": {
+            "title": "Plan Avanzado",
+            "description": "Diseñado para grandes cadenas de supermercados."
+        },
+        "clientTestimonials": "Opiniones de Clientes",
+        "testimonial1": "\"POSCO ha transformado la manera en que manejamos nuestras ventas.\" - Cliente A",
+        "testimonial2": "\"El mejor sistema POS que hemos utilizado.\" - Cliente B",
+        "testimonial3": "\"Excelente servicio y soporte.\" - Cliente C",
+        "recommendedBy": "Empresas que nos recomiendan"
+    },
+    "Register": {
+        "name": "Nombre",
+        "namePlaceholder": "Ingresa tu nombre",
+        "nameError": "El campo nombre es inválido",
+        "lastname": "Apellido",
+        "lastnamePlaceholder": "Ingresa tu apellido",
+        "lastnameError": "El campo apellido es inválido",
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "Ingresa tu correo electrónico",
+        "emailRequired": "Este campo es requerido",
+        "emailError": "El campo email es inválido",
+        "telephone": "Teléfono",
+        "telephonePlaceholder": "Ingresa tu teléfono",
+        "telephoneError": "El campo teléfono es inválido",
+        "password": "Contraseña",
+        "passwordPlaceholder": "Ingresa tu contraseña",
+        "passwordError": "El campo contraseña es inválido",
+        "repeatPassword": "Repetir Contraseña",
+        "repeatPasswordPlaceholder": "Repite tu contraseña",
+        "repeatPasswordError": "El campo repetir contraseña es inválido",
+        "acceptTerms": "Acepto los términos y condiciones",
+        "termsError": "Se debe aceptar los términos y condiciones",
+        "registerButton": "Registrarse"
+    },
+    "Login": {
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "Correo electrónico",
+        "emailError": "El campo email es inválido",
+        "password": "Contraseña",
+        "passwordPlaceholder": "Contraseña",
+        "passwordError": "El campo contraseña es inválido",
+        "submit": "Ingresar"
+    },
+    "HomeNavbar": {
+        "home": "Inicio",
+        "about": "Sobre nosotros",
+        "contact": "Contacto",
+        "login": "Iniciar sesión",
+        "register": "Registrar"
+    },
+    "HomeFooter": {
+        "contact": "Contacto",
+        "email": "Email: contacto@posco.com",
+        "phone": "Teléfono: +1 234 567 890",
+        "address": "Dirección",
+        "addressDetails": "123 Calle Principal, Manizales, Colombia",
+        "followUs": "Síguenos",
+        "rightsReserved": "© 2024 Posco. Todos los derechos reservados."
+    },
+    "Profile": {
+        "myProfile": "Mi Perfil",
+        "generalInfo": "Información General",
+        "fullName": "{name} {lastname}",
+        "email": "Email: {email}",
+        "telephone": "Teléfono: {telephone}"
+    },
+    "Card": {
+        "title": "Pepito",
+        "imageAlt": "Imagen de un delfín"
+    },
+    "EmployeesTable": {
+        "header": {
+            "code": "CÓDIGO",
+            "name": "NOMBRE",
+            "lastName": "APELLIDO",
+            "email": "EMAIL",
+            "phone": "TELÉFONO",
+            "actions": "ACCIONES"
+        },
+        "detail": "Detalle"
+    },
+    "NavDashboard": {
+        "title": "POSCO.",
+        "manageEmployees": "Gestionar Empleados",
+        "manageInventory": "Gestionar Inventario",
+        "financialReports": "Reportes Financieros",
+        "logout": "Cerrar sesión"
+    },
+    "ServiceCard": {
+        "hire": "Contratar",
+        "currency": "COP$",
+        "perMonth": "/mes"
+    },
+    "ButtonWithIcon": {
+        "arrow": "Ir"
+    },
+    "CashierNavbar": {
+        "cashier": "Cajero",
+        "store": "Tienda",
+        "registerCode": "Código caja",
+        "buttonText": "Salir"
+    },
+    "FormProfile": {
+        "name": "Nombre",
+        "lastname": "Apellido",
+        "telephone": "Teléfono",
+        "updateButton": "Actualizar"
+    },
+    "HeaderDashboard": {
+        "profileIcon": "👤"
+    },
+    "PermissionAuth": {
+        "redirectMessage": "Redirigiendo a la página de inicio de sesión...",
+        "noPermissionMessage": "No tienes permiso para acceder a esta sección. Redirigiendo al dashboard..."
+    },
+    "ButtonDelete": {
+        "text": "Eliminar"
+    },
+    "ButtonEdit":{
+        "text": "Editar"
+    }
+}

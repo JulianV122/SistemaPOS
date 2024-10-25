@@ -1,0 +1,136 @@
+{
+    "LandingPage": {
+        "subtitle": "POS systems for all types of supermarkets and stores",
+        "welcome": "Welcome to POSCO",
+        "description": "POSCO specializes in the sale of POS (Point of Sale) systems. We offer a SaaS service with different plans tailored to the needs of supermarkets and stores of all sizes.",
+        "servicePlans": "Service Plans",
+        "basicPlan": {
+            "title": "Basic Plan",
+            "description": "Ideal for small stores."
+        },
+        "intermediatePlan": {
+            "title": "Intermediate Plan",
+            "description": "Perfect for medium-sized supermarkets."
+        },
+        "advancedPlan": {
+            "title": "Advanced Plan",
+            "description": "Designed for large supermarket chains."
+        },
+        "clientTestimonials": "Client Testimonials",
+        "testimonial1": "\"POSCO has transformed the way we handle our sales.\" - Client A",
+        "testimonial2": "\"The best POS system we have ever used.\" - Client B",
+        "testimonial3": "\"Excellent service and support.\" - Client C",
+        "recommendedBy": "Companies that recommend us"
+    },
+    "Register": {
+        "name": "First Name",
+        "namePlaceholder": "Enter your first name",
+        "nameError": "The name field is invalid",
+        "lastname": "Last Name",
+        "lastnamePlaceholder": "Enter your last name",
+        "lastnameError": "The last name field is invalid",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "emailRequired": "This field is required",
+        "emailError": "The email field is invalid",
+        "telephone": "Phone",
+        "telephonePlaceholder": "Enter your phone number",
+        "telephoneError": "The phone field is invalid",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordError": "The password field is invalid",
+        "repeatPassword": "Repeat Password",
+        "repeatPasswordPlaceholder": "Repeat your password",
+        "repeatPasswordError": "The repeat password field is invalid",
+        "acceptTerms": "I accept the terms and conditions",
+        "termsError": "You must accept the terms and conditions",
+        "registerButton": "Register"
+    },
+    "Login": {
+        "email": "Email",
+        "emailPlaceholder": "Email address",
+        "emailError": "The email field is invalid",
+        "password": "Password",
+        "passwordPlaceholder": "Password",
+        "passwordError": "The password field is invalid",
+        "submit": "Login"
+    },
+    "HomeNavbar": {
+        "home": "Home",
+        "about": "About Us",
+        "contact": "Contact",
+        "login": "Login",
+        "register": "Register"
+    },
+    "HomeFooter": {
+        "contact": "Contact",
+        "email": "Email: contacto@posco.com",
+        "phone": "Phone: +1 234 567 890",
+        "address": "Address",
+        "addressDetails": "123 Main Street, Manizales, Colombia",
+        "followUs": "Follow Us",
+        "rightsReserved": "© 2024 Posco. All rights reserved."
+    },
+    "Profile": {
+        "myProfile": "My Profile",
+        "generalInfo": "General Information",
+        "fullName": "{name} {lastname}",
+        "email": "Email: {email}",
+        "telephone": "Phone: {telephone}"
+    },
+    "Card": {
+        "title": "Pepito",
+        "imageAlt": "Image of a dolphin"
+    },
+    "EmployeesTable": {
+        "header": {
+            "code": "CODE",
+            "name": "NAME",
+            "lastName": "LAST NAME",
+            "email": "EMAIL",
+            "phone": "PHONE",
+            "actions": "ACTIONS"
+        },
+        "detail": "Detail"
+    },
+    "NavDashboard": {
+        "title": "POSCO.",
+        "manageEmployees": "Manage Employees",
+        "manageInventory": "Manage Inventory",
+        "financialReports": "Financial Reports",
+        "logout": "Logout"
+    },
+    "ServiceCard": {
+        "hire": "Hire",
+        "currency": "USD$",
+        "perMonth": "/month"
+    },
+    "ButtonWithIcon": {
+        "arrow": "Go"
+    },
+    "CashierNavbar": {
+        "cashier": "Cashier",
+        "store": "Store",
+        "registerCode": "Register code",
+        "buttonText": "Logout"
+    },
+    "FormProfile": {
+        "name": "Name",
+        "lastname": "Last Name",
+        "telephone": "Telephone",
+        "updateButton": "Update"
+    },
+    "HeaderDashboard": {
+        "profileIcon": "👤"
+    },
+    "PermissionAuth": {
+        "redirectMessage": "Redirecting to login page...",
+        "noPermissionMessage": "You do not have permission to access this section. Redirecting to dashboard..."
+    },
+    "ButtonDelete": {
+        "text": "Delete"
+    },
+    "ButtonEdit":{
+        "text": "Edit"
+    }
+}
