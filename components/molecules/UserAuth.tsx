@@ -1,7 +1,7 @@
 "use client"; // Este componente es solo para el cliente
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useUserSession } from "@/store/userSession"; 
 
 export function UserAuth({ children }: { children: React.ReactNode }) {

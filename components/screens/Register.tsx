@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React from 'react';
 import { ButtonPrimary } from '@/components';
 import { DevTool } from "@hookform/devtools";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useRouter } from '@/i18n/routing';
+
+import { useForm, SubmitHandler } from "react-hook-form";
 import { registerUser } from '@/services/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '@/validators/registerSchema';
+import { useTranslations } from 'next-intl';
 
 type Inputs = {
     name: string;
@@ -16,10 +18,11 @@ type Inputs = {
     telephone: string;
     password: string;
     repeatPassword: string;
-    terms: string;
+    terms: boolean;
 }
 
 export function Register() {
+    const t = useTranslations('Register');
 
     const {
         register,
@@ -29,98 +32,98 @@ export function Register() {
         control
     } = useForm<Inputs>({
         resolver: zodResolver(registerSchema)
-    })
+    });
+
+    const router = useRouter();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
         registerUser(data.email, data.password, data.name, data.lastname, data.telephone);
         router.push('/login');
-    }
-
-    const router = useRouter();
+    };
 
     return (
         <div className="w-full max-w-xl">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                        Nombre
+                        {t('name')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.name ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="name"
                         type="text"
-                        placeholder="Nombre"
+                        placeholder={t('namePlaceholder')}
                         {...register("name", { required: true })}
                     />
-                    {errors.name && <p className="text-red-500 text-xs italic"> El campo nombre es invalido </p>}
+                    {errors.name && <p className="text-red-500 text-xs italic">{t('nameError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastname">
-                        Apellido
+                        {t('lastname')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.lastname ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="lastname"
                         type="text"
-                        placeholder="Apellido"
+                        placeholder={t('lastnamePlaceholder')}
                         {...register("lastname", { required: true })}
                     />
-                    {errors.lastname && <p className="text-red-500 text-xs italic"> El campo apellido es invalido </p>}
+                    {errors.lastname && <p className="text-red-500 text-xs italic">{t('lastnameError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                        Correo Electrónico
+                        {t('email')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.email ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="email"
                         type="email"
-                        placeholder="Correo electrónico"
+                        placeholder={t('emailPlaceholder')}
                         {...register("email", {
-                            required: "Este campo es requerido"
+                            required: t('emailRequired')
                         })}
                     />
-                    {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
+                    {errors.email && <p className="text-red-500 text-xs italic">{t('emailError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="telephone">
-                        Teléfono
+                        {t('telephone')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.telephone ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="telephone"
                         type="text"
-                        placeholder="Teléfono"
+                        placeholder={t('telephonePlaceholder')}
                         {...register("telephone", { required: true })}
                     />
-                    {errors.telephone && <p className="text-red-500 text-xs italic"> El campo teléfono es invalido </p>}
+                    {errors.telephone && <p className="text-red-500 text-xs italic">{t('telephoneError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                        Contraseña
+                        {t('password')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.password ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="password"
                         type="password"
-                        placeholder="Contraseña"
+                        placeholder={t('passwordPlaceholder')}
                         {...register("password", { required: true })}
                     />
-                    {errors.password && <p className="text-red-500 text-xs italic"> El campo contraseña es invalido </p>}
+                    {errors.password && <p className="text-red-500 text-xs italic">{t('passwordError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="repeat_password">
-                        Repetir Contraseña
+                        {t('repeatPassword')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.repeatPassword ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="repeat_password"
                         type="password"
-                        placeholder="Repite la contraseña"
+                        placeholder={t('repeatPasswordPlaceholder')}
                         {...register("repeatPassword", { required: true })}
                     />
-                    {errors.repeatPassword && <p className="text-red-500 text-xs italic"> El campo repetir contraseña es invalido </p>}
+                    {errors.repeatPassword && <p className="text-red-500 text-xs italic">{t('repeatPasswordError')}</p>}
                 </div>
                 <div className="flex-auto mb-6">
                     <label className="block text-gray-500 font-bold text-sm">
@@ -130,15 +133,15 @@ export function Register() {
                             {...register("terms", { required: true })}
                         />
                         <span>
-                            Acepto los términos y condiciones
+                            {t('acceptTerms')}
                         </span>
                     </label>
-                    {errors.terms && <p className="text-red-500 text-xs italic"> Se debe aceptar los terminos y condiciones</p>}
+                    {errors.terms && <p className="text-red-500 text-xs italic">{t('termsError')}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <ButtonPrimary text="Registrarse" />
+                    <ButtonPrimary text={t('registerButton')} />
                 </div>
-                <input type="submit" />
+                <input type="submit" hidden />
             </form>
             <DevTool control={control} />
         </div>

@@ -1,8 +1,9 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { loginUser, getCurrentUser } from '@/services/auth';
 import { DevTool } from "@hookform/devtools";
@@ -17,6 +18,7 @@ type Inputs = {
 
 
 export function Login() {
+    const t = useTranslations('Login');
     const { setUser } = useUserSession();
 
     const {
@@ -64,38 +66,39 @@ export function Login() {
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                        Correo Electrónico
+                        {t('email')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.email ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                         id="email"
                         type="email"
-                        placeholder="Correo electrónico"
+                        placeholder={t('emailPlaceholder')}
                         {...register("email", {
                             required: "Este campo es requerido",
                         })}
                     />
-                    {errors.email && <p className="text-red-500 text-xs italic"> El campo email es invalido </p>}
+                    {errors.email && <p className="text-red-500 text-xs italic">{t('emailError')}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                        Contraseña
+                        {t('password')}
                     </label>
                     <input
                         className={`shadow appearance-none border ${errors.password ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                         id="password"
                         type="password"
-                        placeholder="Contraseña"
+                        placeholder={t('passwordPlaceholder')}
                         {...register("password", { required: true })}
                     />
-                    {errors.password && <p className="text-red-500 text-xs italic"> El campo contraseña es invalido </p>}
+                    {errors.password && <p className="text-red-500 text-xs italic">{t('passwordError')}</p>}
                 </div>
                 <div className="w-full flex justify-center">
-                    <ButtonPrimary text="Ingresar" />
+                    <ButtonPrimary text={t('submit')} />
                 </div>
                 <input type="submit" />
             </form>
             <DevTool control={control} />
         </div>
     );
+
 }
