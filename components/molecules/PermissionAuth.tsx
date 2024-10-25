@@ -1,7 +1,7 @@
 "use client"; // Se ejecuta solo en el cliente
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useUserSession } from "@/store/userSession"; 
 import { useTranslations } from 'next-intl';
 

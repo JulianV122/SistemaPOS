@@ -5,7 +5,7 @@ import { ButtonPrimary } from "@/components";
 
 
 
-export default function employee() {
+export default function Employee() {
     const { employeeId } = useParams();
 
     return (
