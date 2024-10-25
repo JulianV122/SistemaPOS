@@ -1,6 +1,6 @@
 
 
-import { app } from "./config";
+import { app } from "@/services/config";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, updatePhoneNumber } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 const auth = getAuth(app);
