@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 export function ButtonEdit() {
     const t = useTranslations('ButtonEdit');
     return (
-        <button className={`text-white bg-red-700 hover:bg-red-800 ${buttonTable}`}>
+        <button className={`text-white bg-blue-500 hover:bg-blue-600 ${buttonTable}`}>
             {t('text')}
         </button>
     )

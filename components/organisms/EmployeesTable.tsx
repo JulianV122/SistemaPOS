@@ -1,6 +1,6 @@
 import { Tr, Th, Td, ButtonEdit, ButtonDelete } from "@/components";
 import { buttonTable } from "@/components/tokens";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
 const employeesData = [

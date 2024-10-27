@@ -4,7 +4,10 @@ import { FormProfile } from "@/components";
 import { useUserSession } from "@/store/userSession";
 import { useTranslations } from 'next-intl';
 
+import { Link, usePathname } from '@/i18n/routing';
+
 export default function Profile() {
+    const pathname = usePathname();
     const { user } = useUserSession();
     const t = useTranslations('Profile');
 
@@ -28,6 +31,12 @@ export default function Profile() {
                                 </h3>
                                 <p className="text-gray-600">{t('email', { email: user?.email })}</p>
                                 <p className="text-gray-600">{t('telephone', { telephone: user?.telephone })}</p>
+                            </div>
+                            <div className='flex m-4 items-center gap-2 p-2 bg-gray-400 text-black rounded-full'>
+                                <span className="text-1xl">🌎</span>
+                                <Link href={`/${pathname}`} locale="en" className="text-black">EN</Link>
+                                <span>|</span>
+                                <Link href={`/${pathname}`} locale="es" className="text-black">ES</Link>
                             </div>
                         </div>
                     </div>

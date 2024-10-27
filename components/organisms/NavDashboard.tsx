@@ -3,7 +3,7 @@
 import React from 'react';
 import { ButtonWithIcon } from "@/components";
 import { buttonSecondary } from '../tokens';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useUserSession } from "@/store/userSession";
 import { useTranslations } from 'next-intl';
 
