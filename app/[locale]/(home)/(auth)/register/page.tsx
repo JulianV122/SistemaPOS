@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Register } from '@/components';
+import { AuthRedirect } from '@/components';
 
 export const metadata: Metadata = {
   title: "Register to Market Management",
@@ -8,8 +9,10 @@ export const metadata: Metadata = {
 
 export default function register() {
   return (
-    <div className="register">
-        <Register />
-    </div>
+    <AuthRedirect>
+      <div className="register">
+          <Register />
+      </div>
+    </AuthRedirect>
   )
 }

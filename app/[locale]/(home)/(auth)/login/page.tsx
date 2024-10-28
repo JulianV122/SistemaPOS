@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import { Login } from "@/components";
+import { AuthRedirect } from "@/components";
 
 export const metadata: Metadata = {
   title: "Login to Market Management",
@@ -9,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function login() {
   return (
-    <div className="login">
-      <Login/>
-    </div>
+    <AuthRedirect>
+      <div className="login">
+        <Login/>
+      </div>
+    </AuthRedirect>
   );
 }
