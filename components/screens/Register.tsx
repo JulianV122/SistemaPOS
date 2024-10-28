@@ -143,7 +143,6 @@ export function Register() {
                 </div>
                 <input type="submit" hidden />
             </form>
-            <DevTool control={control} />
         </div>
     );
 }

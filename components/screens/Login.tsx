@@ -6,7 +6,6 @@ import { ButtonPrimary } from '@/components';
 import { useRouter } from '@/i18n/routing';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { loginUser, getCurrentUser } from '@/services/auth';
-import { DevTool } from "@hookform/devtools";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/validators/loginSchema';
 import { useUserSession } from '@/store/userSession';
@@ -97,7 +96,6 @@ export function Login() {
                 </div>
                 <input type="submit" />
             </form>
-            <DevTool control={control} />
         </div>
     );
 
