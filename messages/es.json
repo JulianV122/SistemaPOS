@@ -60,7 +60,8 @@
         "about": "Sobre nosotros",
         "contact": "Contacto",
         "login": "Iniciar sesión",
-        "register": "Registrar"
+        "register": "Registrar",
+        "dashboard": "Tablero"
     },
     "HomeFooter": {
         "contact": "Contacto",
@@ -132,5 +133,8 @@
     },
     "ButtonEdit":{
         "text": "Editar"
+    },
+    "AuthRedirect": {
+        "redirectMessage": "Ya estas logueado, redirigiendo al dashboard..."
     }
 }

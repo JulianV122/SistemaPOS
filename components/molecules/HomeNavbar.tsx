@@ -7,10 +7,12 @@ import { logo } from '@/public'; // Assume you have a world icon in your public 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
+import { useUserSession } from '@/store/userSession';
 
 export function HomeNavbar() {
     const pathname = usePathname();
     const t = useTranslations('HomeNavbar');
+    const { user } = useUserSession();
     return (
         <nav className={navbarStyles}>
             <div className='flex gap-10 items-center'>
@@ -32,12 +34,22 @@ export function HomeNavbar() {
                     <span>|</span>
                     <Link href={`/${pathname}`}  locale="es" className="text-black">ES</Link>
                 </div>
-                <Link href="/login">
-                    <ButtonSecondary text={t('login')} />
-                </Link>
-                <Link href="/register">
-                    <ButtonSecondary text={t('register')} />
-                </Link>
+                {user === null && (
+                    <>
+                        <Link href="/login">
+                            <ButtonSecondary text={t('login')} />
+                        </Link>
+                        <Link href="/register">
+                            <ButtonSecondary text={t('register')} />
+                        </Link>
+                    </>
+                )}
+                {user !== null && (
+                    <Link href="/dashboard">
+                        <ButtonSecondary text={t('dashboard')} />
+                    </Link>
+                )}
+
             </div>
         </nav>
     );

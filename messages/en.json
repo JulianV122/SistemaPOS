@@ -60,7 +60,8 @@
         "about": "About Us",
         "contact": "Contact",
         "login": "Login",
-        "register": "Register"
+        "register": "Register",
+        "dashboard": "Dashboard"
     },
     "HomeFooter": {
         "contact": "Contact",
@@ -132,5 +133,8 @@
     },
     "ButtonEdit":{
         "text": "Edit"
+    },
+    "AuthRedirect": {
+        "redirectMessage": "You are already logged in. Redirecting to dashboard..."
     }
 }
