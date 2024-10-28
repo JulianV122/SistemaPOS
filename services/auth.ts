@@ -1,10 +1,32 @@
 
 
 import { app } from "@/services/config";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, updatePhoneNumber } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// Configurar la persistencia de la autenticación
+setPersistence(auth, browserLocalPersistence)
+    .then(() => {
+        console.log('Persistencia configurada a local');
+    })
+    .catch((error) => {
+        console.error('Error al configurar la persistencia', error);
+    });
+
+// Verificar el estado de autenticación del usuario
+export async function checkAuthState(callback: (user: any) => void) {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const userData = await getCurrentUser();
+            callback(userData);
+        } else {
+            console.log('No hay usuario autenticado');
+            callback(null);
+        }
+    });
+}
 
 // Hacer registro de usuario con Firebase
 export async function registerUser(email: string, password: string, name: string, lastname: string, telephone: string) {

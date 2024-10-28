@@ -3,13 +3,22 @@
 import React from 'react';
 import { ButtonWithIcon } from "@/components";
 import { buttonSecondary } from '../tokens';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { useUserSession } from "@/store/userSession";
 import { useTranslations } from 'next-intl';
+import { logoutUser } from '@/services/auth';
+
 
 export function NavDashboard() {
-    const { user } = useUserSession();
+    const { user, clear } = useUserSession();
     const t = useTranslations('NavDashboard');
+    const router = useRouter();
+
+    const logout = async () => {
+        clear();
+        await logoutUser();
+        router.push('/');
+    }
 
     return (
         <aside className="w-64 flex flex-col bg-slate-800">
@@ -46,7 +55,8 @@ export function NavDashboard() {
                 </div>
             </div>
             <div className="p-4">
-                <Link href={'/'}><button className={` w-full ${buttonSecondary}`}>{t('logout')}</button></Link>
+
+                <button onClick={logout} className={` w-full ${buttonSecondary}`}>{t('logout')}</button>
             </div>
         </aside>
     );

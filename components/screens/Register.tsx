@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { ButtonPrimary } from '@/components';
-import { DevTool } from "@hookform/devtools";
 import { useRouter } from '@/i18n/routing';
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -143,7 +142,6 @@ export function Register() {
                 </div>
                 <input type="submit" hidden />
             </form>
-            <DevTool control={control} />
         </div>
     );
 }
