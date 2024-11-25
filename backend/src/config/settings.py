@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env", env_ignore_empty=True, extra="ignore"
     )
-    PROJECT_NAME: str = "Walkers"
+    PROJECT_NAME: str = "POSCO"
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
     # 60 minutes * 24 hours * 8 days = 8 days
@@ -27,10 +27,10 @@ class Settings(BaseSettings):
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     BACKEND_CORS_ORIGINS: list = [
-        "http://localhost", 
-        "https://localhost",
-        "http://localhost.dev.com", 
-        "https://localhost.dev.com"
+        "http://localhost:3000", 
+        "https://localhost:3000",
+        "http://localhost.dev.com:3000", 
+        "https://localhost.dev.com:3000"
     ]
     FIRST_SUPERUSER: str
     FIRST_SUPERUSER_PASSWORD: str
@@ -49,6 +49,11 @@ class Settings(BaseSettings):
     OAUTH_CODE: str
 
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 48
+
+    FIRST_ENTERPRISE_NAME: str
+    FIRST_ENTERPRISE_NIT: str
+    FIRST_ENTERPRISE_EMAIL: str
+    FIRST_ENTERPRISE_PHONE: str
 
 
 settings = Settings()

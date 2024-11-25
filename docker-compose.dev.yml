@@ -6,11 +6,16 @@ services:
       context: frontend
       dockerfile: Dockerfile.dev
     volumes:
-      - ./frontend/src:/app/src
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     networks:
       - default
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
     labels:
       - traefik.enable=true
 
