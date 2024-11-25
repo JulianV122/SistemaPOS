@@ -25,10 +25,10 @@ services:
       - traefik.http.routers.posco-frontend-https.entrypoints=https
       - traefik.http.routers.posco-frontend-https.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.posco-frontend-https.tls=true
-      - traefik.http.routers.posco-backend-https.tls.certresolver=le
+      - traefik.http.routers.posco-frontend-https.tls.certresolver=le
 
       # Enable redirection for HTTP and HTTPS
-      - traefik.http.routers.posco-backend-http.middlewares=https-redirect
+      - traefik.http.routers.posco-frontend-http.middlewares=https-redirect
 
   backend:
     container_name: posco-backend
