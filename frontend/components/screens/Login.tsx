@@ -32,16 +32,11 @@ export function Login() {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data);
-        const response = await loginUser(data.email, data.password);
-
-
-        if (response.code === 'auth/invalid-credential') {
-            alert('Usuario no encontrado');
-            return;
-        }
-
+        await loginUser(data.email, data.password);
         const user = await getCurrentUser();
+        console.log(user);
 
+        /**
         if (user) {
             setUser({
                 id: user.uid,
@@ -53,7 +48,9 @@ export function Login() {
                 roleDescription: user.role.description,
                 permissions: user.role.permissions
             });
-        }
+        } 
+         */
+        
 
         router.push('/dashboard');
     }

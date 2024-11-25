@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo --port 3000 --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -18,7 +18,8 @@
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "zod": "^3.23.8",
-    "zustand": "^5.0.0-rc.2"
+    "zustand": "^5.0.0-rc.2",
+    "axios": "^1.7.2"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
