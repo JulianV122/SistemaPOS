@@ -17,21 +17,21 @@ export function HomeNavbar() {
     return (
         <nav className={`${navbarStyles} relative`}>
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
-                <div className='flex gap-9 '>
-                    <div className="">
-                        <Image width="100" src={logo} alt="Logo de Posco." />
+                <div className='flex gap-9'>
+                    <div className='mt-1'>
+                        <Image width="100"  src={logo} alt="Logo de Posco." />
                     </div>
                     <div className="hidden lg:flex ">
-                        <ul className="flex gap-8">
-                            <li><Link href="/" className="text-white hover:underline">{t('home')}</Link></li>
-                            <li><Link href="/about" className="text-white hover:underline">{t('about')}</Link></li>
-                            <li><Link href="/contact" className="text-white hover:underline">{t('contact')}</Link></li>
+                        <ul className="flex gap-6 ml-5">
+                            <li><Link href="/" className="text-gray-600 text-xl font-normal	 hover:underline   hover:text-blue-400 ">{t('home')}</Link></li>
+                            <li><Link href="/about" className="text-gray-600 text-xl font-normal hover:underline  hover:text-blue-400">{t('about')}</Link></li>
+                            <li><Link href="/contact" className="text-gray-600 text-xl font-normal hover:underline hover:text-blue-400">{t('contact')}</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="hidden lg:flex items-center gap-4">
-                    <div className="flex items-center gap-2 p-2 bg-white text-black rounded-full">
+                    <div className="flex items-center gap-2 p-2 border text-black rounded-full">
                         <span className="text-xl">🌎</span>
                         <Link href={`/${pathname}`} locale="en" className="text-black hover:underline">EN</Link>
                         <span>|</span>
