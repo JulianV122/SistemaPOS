@@ -1,4 +1,5 @@
 import { authService } from './api';
+import { useUserSession } from '@/store/userSession';
 
 // Reemplaza las funciones existentes de Firebase
 export async function loginUser(email: string, password: string) {
@@ -27,7 +28,23 @@ export async function registerUser(email: string, password: string, name: string
 
 export async function getCurrentUser() {
     try {
-        return await authService.getCurrentUser();
+        const user = await authService.getCurrentUser();
+        
+        if (user) {
+            const { setUser } = useUserSession.getState();
+            setUser({
+                id: user.id.toString(),
+                email: user.email,
+                name: user.name,
+                lastname: user.lastname,
+                telephone: user.telephone,
+                role: user.role.name,
+                roleDescription: user.role.description,
+                permissions: user.role.permissions.map((p: { name: string }) => p.name)
+            });
+            return user;
+        }
+        return null;
     } catch (error) {
         console.error('Error al obtener usuario actual:', error);
         return null;

@@ -48,6 +48,7 @@ def init_db(session: Session) -> None:
             name="Admin",
             lastname="System",
             code="ADMIN001",
+            telephone="0000000000",
             enterprise_id=enterprise.id,
             role_id=admin_role.id
         )

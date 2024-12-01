@@ -13,7 +13,7 @@ export function UserSession({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         getCurrentUser().then((user) => {
             if (user) {
-                setUser(user);
+                console.log('USUARIO LOGEADO');
             } else {
                 clear();
             }

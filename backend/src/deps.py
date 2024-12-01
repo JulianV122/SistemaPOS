@@ -5,6 +5,8 @@ import jwt
 from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
 from sqlmodel import Session
+from src.models.employee_auth import EmployeeAuth, PermissionInfo, RoleInfo
+
 
 from src.config.security import ALGORITHM
 from src.config.settings import settings
@@ -27,7 +29,7 @@ CurrentUser = Annotated[Employee, Depends(reusable_oauth2)]
 def get_current_employee(
     session: SessionDep,
     token: str = Depends(reusable_oauth2)
-) -> Employee:
+) -> EmployeeAuth:
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[ALGORITHM]
@@ -45,11 +47,36 @@ def get_current_employee(
             status_code=404, 
             detail="Employee not found"
         )
-    return employee
+    
+    employee_auth = EmployeeAuth(
+        id=employee.id,
+        name=employee.name,
+        lastname=employee.lastname,
+        email=employee.email,
+        code=employee.code,
+        telephone=employee.telephone,
+        enterprise_id=employee.enterprise_id,
+        is_active=employee.is_active,
+        role=RoleInfo(
+            id=employee.role.id,
+            name=employee.role.name,
+            description=employee.role.description,
+            permissions=[
+                PermissionInfo(
+                    id=permission.id,
+                    name=permission.name,
+                    description=permission.description
+                )
+                for permission in employee.role.permissions
+            ]
+        )
+    )
+
+    return employee_auth
 
 def get_current_active_employee(
     current_employee: Employee = Depends(get_current_employee),
-) -> Employee:
+) -> EmployeeAuth:
     if not current_employee.is_active:
         raise HTTPException(
             status_code=400, 
@@ -59,7 +86,7 @@ def get_current_active_employee(
 
 def get_current_active_superuser(
     current_employee: Employee = Depends(get_current_active_employee),
-) -> Employee:
+) -> EmployeeAuth:
     if current_employee.role.name != "ADMIN":
         raise HTTPException(
             status_code=400, 

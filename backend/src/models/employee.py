@@ -7,6 +7,7 @@ class EmployeeBase(SQLModel):
     email: EmailStr = Field(max_length=100)
     code: str = Field(max_length=45)
     lastname: str = Field(max_length=100)
+    telephone: str = Field(max_length=20)
 
 class Employee(EmployeeBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -28,7 +29,6 @@ class EmployeeRead(EmployeeBase):
     enterprise_id: int
     role_id: int
     is_active: bool
-
 class EmployeeUpdate(SQLModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -37,3 +37,4 @@ class EmployeeUpdate(SQLModel):
     password: Optional[str] = None
     is_active: Optional[bool] = None
     role_id: Optional[int] = None
+    telephone: Optional[str] = None

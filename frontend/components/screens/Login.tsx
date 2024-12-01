@@ -35,23 +35,6 @@ export function Login() {
         await loginUser(data.email, data.password);
         const user = await getCurrentUser();
         console.log(user);
-
-        /**
-        if (user) {
-            setUser({
-                id: user.uid,
-                email: user.email ?? '',
-                name: user.name,
-                lastname: user.lastname,
-                telephone: user.telephone,
-                role: user.role.name,
-                roleDescription: user.role.description,
-                permissions: user.role.permissions
-            });
-        } 
-         */
-        
-
         router.push('/dashboard');
     }
 

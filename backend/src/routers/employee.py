@@ -5,6 +5,7 @@ from src.crud import employee as crud
 from src.deps import SessionDep, get_current_active_superuser, get_current_active_employee
 from src.models.employee import Employee, EmployeeCreate, EmployeeRead, EmployeeUpdate
 from src.models.utils import Message
+from src.models.employee_auth import EmployeeAuth
 
 router = APIRouter()
 
@@ -48,7 +49,7 @@ def create_employee(
             status_code=400,
             detail="An employee with this email already exists.",
         )
-    
+    print(employee.role.permissions)
     # Solo un admin puede crear empleados en otras empresas
     if (current_employee.role.name != "ADMIN" and 
         employee_in.enterprise_id != current_employee.enterprise_id):
@@ -60,9 +61,9 @@ def create_employee(
     employee = crud.create(session=session, obj_in=employee_in)
     return employee
 
-@router.get("/me", response_model=EmployeeRead)
+@router.get("/me", response_model=EmployeeAuth)
 def read_employee_me(
-    current_employee: Employee = Depends(get_current_active_employee)
+    current_employee: EmployeeAuth = Depends(get_current_active_employee)
 ) -> Any:
     """
     Get current employee.
@@ -83,3 +84,4 @@ def read_employee(
     if not employee:
         raise HTTPException(status_code=404, detail="Employee not found")
     return employee
+
