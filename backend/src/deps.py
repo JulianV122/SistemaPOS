@@ -2,6 +2,7 @@ from typing import Annotated, Generator
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
+from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
 from sqlmodel import Session
 
@@ -32,7 +33,7 @@ def get_current_employee(
             token, settings.SECRET_KEY, algorithms=[ALGORITHM]
         )
         token_data = TokenPayload(**payload)
-    except (jwt.JWTError, ValidationError):
+    except (InvalidTokenError, ValidationError):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Could not validate credentials",
