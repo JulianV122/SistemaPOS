@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "./globals.css"
 import { UserSession } from "@/components";
+import { AlertContainer } from '@/components/atoms/Alert';
 
 export default async function LocaleLayout({
   children,
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
             {children}
           </NextIntlClientProvider>
         </UserSession>
+        <AlertContainer />
       </body>
     </html>
   );

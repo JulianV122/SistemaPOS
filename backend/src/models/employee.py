@@ -24,11 +24,8 @@ class EmployeeCreate(EmployeeBase):
     enterprise_id: int
     role_id: int
 
-class EmployeeRead(EmployeeBase):
-    id: int
-    enterprise_id: int
-    role_id: int
-    is_active: bool
+
+
 class EmployeeUpdate(SQLModel):
     name: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -38,3 +35,31 @@ class EmployeeUpdate(SQLModel):
     is_active: Optional[bool] = None
     role_id: Optional[int] = None
     telephone: Optional[str] = None
+
+class EmployeeUpdateMe(SQLModel):
+    name: Optional[str] = None
+    lastname: Optional[str] = None
+    telephone: Optional[str] = None
+
+class EnterpriseInfo(SQLModel):
+    id: int
+    name: str
+    NIT: str
+
+class PermissionInfo(SQLModel):
+    id: int
+    name: str
+    description: str
+
+class RoleInfo(SQLModel):
+    id: int
+    name: str
+    description: str
+    permissions: List[PermissionInfo]
+
+
+class EmployeeRead(EmployeeBase):
+    id: int
+    is_active: bool
+    enterprise: EnterpriseInfo
+    role: RoleInfo

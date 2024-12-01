@@ -6,7 +6,7 @@ type ButtonSecondaryProps = {
 
 export function ButtonSecondary({text}: ButtonSecondaryProps) {
     return (
-        <button className={buttonSecondary}>
+        <button className={buttonSecondary} >
             {text}
         </button>
     )

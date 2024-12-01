@@ -5,40 +5,45 @@ import React, { useState } from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from '@/i18n/routing';
 import { useForm, SubmitHandler } from "react-hook-form"
-import { loginUser, getCurrentUser } from '@/services/auth';
+import { loginUser } from '@/services/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/validators/loginSchema';
 import { useUserSession } from '@/store/userSession';
+import { showAlert } from '@/components/atoms/Alert';
 
 type Inputs = {
     email: string,
     password: string
 }
 
-
 export function Login() {
     const t = useTranslations('Login');
     const { setUser } = useUserSession();
+    const router = useRouter();
 
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
-        control
     } = useForm<Inputs>({
         resolver: zodResolver(loginSchema)
     })
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data);
-        await loginUser(data.email, data.password);
-        const user = await getCurrentUser();
-        console.log(user);
-        router.push('/dashboard');
+        try {
+            await loginUser(data.email, data.password);
+            showAlert({
+                type: 'success',
+                message: '¡Sesión iniciada correctamente!'
+            });
+            router.push('/dashboard');
+        } catch (error: any) {
+            showAlert({
+                type: 'error',
+                message: error.response?.data?.detail || 'Error al iniciar sesión'
+            });
+        }
     }
-
-    const router = useRouter();
 
     return (
         <div className="w-full max-w-xl">
@@ -52,9 +57,7 @@ export function Login() {
                         id="email"
                         type="email"
                         placeholder={t('emailPlaceholder')}
-                        {...register("email", {
-                            required: "Este campo es requerido",
-                        })}
+                        {...register("email")}
                     />
                     {errors.email && <p className="text-red-500 text-xs italic">{t('emailError')}</p>}
                 </div>
@@ -67,16 +70,14 @@ export function Login() {
                         id="password"
                         type="password"
                         placeholder={t('passwordPlaceholder')}
-                        {...register("password", { required: true })}
+                        {...register("password")}
                     />
                     {errors.password && <p className="text-red-500 text-xs italic">{t('passwordError')}</p>}
                 </div>
                 <div className="w-full flex justify-center">
                     <ButtonPrimary text={t('submit')} />
                 </div>
-                <input type="submit" />
             </form>
         </div>
     );
-
 }

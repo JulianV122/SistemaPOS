@@ -34,6 +34,12 @@ export interface EmployeeUpdate {
     role_id?: number;
 }
 
+export interface EmployeeUpdateMe {
+    name?: string;
+    lastname?: string;
+    telephone?: string;
+}
+
 export const employeeService = {
     async getAll(skip: number = 0, limit: number = 100) {
         const response = await api.get(`/employees?skip=${skip}&limit=${limit}`);
@@ -62,6 +68,11 @@ export const employeeService = {
 
     async getMe() {
         const response = await api.get('/employees/me');
+        return response.data;
+    },
+
+    async updateMe(data: EmployeeUpdateMe) {
+        const response = await api.patch('/employees/me', data);
         return response.data;
     }
 };

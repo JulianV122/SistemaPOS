@@ -5,13 +5,10 @@ import jwt
 from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
 from sqlmodel import Session
-from src.models.employee_auth import EmployeeAuth, PermissionInfo, RoleInfo
-
-
 from src.config.security import ALGORITHM
 from src.config.settings import settings
 from src.config.db import engine
-from src.models.employee import Employee
+from src.models.employee import Employee, EmployeeRead, PermissionInfo, RoleInfo, EnterpriseInfo
 from src.crud import employee as employee_crud
 from src.models.utils import TokenPayload
 
@@ -29,7 +26,7 @@ CurrentUser = Annotated[Employee, Depends(reusable_oauth2)]
 def get_current_employee(
     session: SessionDep,
     token: str = Depends(reusable_oauth2)
-) -> EmployeeAuth:
+) -> EmployeeRead:
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[ALGORITHM]
@@ -48,7 +45,8 @@ def get_current_employee(
             detail="Employee not found"
         )
     
-    employee_auth = EmployeeAuth(
+    # Construir el objeto EmployeeAuth con la información de la empresa
+    employee_auth = EmployeeRead(
         id=employee.id,
         name=employee.name,
         lastname=employee.lastname,
@@ -69,14 +67,19 @@ def get_current_employee(
                 )
                 for permission in employee.role.permissions
             ]
+        ),
+        enterprise=EnterpriseInfo(
+            id=employee.enterprise.id,
+            name=employee.enterprise.name,
+            NIT=employee.enterprise.NIT
         )
     )
-
+    
     return employee_auth
 
 def get_current_active_employee(
     current_employee: Employee = Depends(get_current_employee),
-) -> EmployeeAuth:
+) -> EmployeeRead:
     if not current_employee.is_active:
         raise HTTPException(
             status_code=400, 
@@ -86,7 +89,7 @@ def get_current_active_employee(
 
 def get_current_active_superuser(
     current_employee: Employee = Depends(get_current_active_employee),
-) -> EmployeeAuth:
+) -> EmployeeRead:
     if current_employee.role.name != "ADMIN":
         raise HTTPException(
             status_code=400, 

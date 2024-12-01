@@ -6,21 +6,18 @@ type ButtonWithIconProps = {
     nameIcon: string
 }
 
-export function ButtonWithIcon({ text , nameIcon }: ButtonWithIconProps) {
+export function ButtonWithIcon({ text, nameIcon }: ButtonWithIconProps) {
     const t = useTranslations('ButtonWithIcon');
 
     return (
         <button className={buttonIcon}>
             <span>
-                <svg stroke="currentColor" className="size-6">
+                <svg className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                     <path d={`${nameIcon}`} />
                 </svg>
             </span>
-            {text}
-            <span>
-                <svg stroke="currentColor" className="size-6">
-                    <path d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clipRule="evenodd" />
-                </svg>
+            <span className="ms-3">
+                {text}
             </span>
         </button>
     );

@@ -9,6 +9,9 @@ type User = {
     role: string;
     roleDescription: string;
     permissions: string[];
+    enterprise: string;
+    enterprise_nit: string;
+    enterprise_id: string;
 }
 
 type UserSessionStore = {

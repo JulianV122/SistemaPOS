@@ -1,7 +1,7 @@
 export * from './molecules/CashierNavbar'
 export * from './organisms/Card'
 export * from './atoms/ButtonPrimary'
-export * from './atoms/ButtonSecundary'
+export * from './atoms/ButtonSecondary'
 export * from './molecules/ButtonWithIcon'
 export * from './organisms/NavDashboard'
 export * from './molecules/HeaderDashBoard'
@@ -23,3 +23,4 @@ export * from './molecules/PermissionAuth'
 export * from './molecules/UserAuth'
 export * from './molecules/UserSession'
 export * from './molecules/AuthRedirect'
+export { Loader } from './atoms/Loader';
