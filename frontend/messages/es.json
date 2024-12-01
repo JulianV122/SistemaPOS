@@ -1,12 +1,25 @@
 {
     "LandingPage": {
+        "headerLanding": "Software POS de punto de venta",
+        "titleLanding" : "Identificación, mail y listo!",
+        "blueTitle": "Tu sistema POS",
+        "blackTitle": "Fácil y rápido",
         "subtitle": "Con nuestro sistemas POS para todo tipo de supermercados y tiendas, gestiona tus ventas de manera eficiente y segura.",
         "welcome": "Bienvenido a POSCO",
         "description": "POSCO se especializa en la venta de sistemas POS (Point of Sale). Ofrecemos un servicio SASS con diferentes planes adaptados a las necesidades de supermercados y tiendas de todos los tamaños.",
         "servicePlans": "Nuestros Planes de Servicio",
+        "buttonStart": "Comienza Ya",
+        "advantages": {
+            "bill": "Facturas rapidas",
+            "billDescription": "Con nuestro sistema POS podras generar facturas rapidas y eficientes para tus clientes.",
+            "price": "Excelente precio",
+            "priceDescription": "Con nuestros planes podras adquirir tu sistema POS a buen precio sin importar el tamaño de tu tienda.",
+            "easy": "Facil administracion",
+            "easyDescription": "Nuestro sistema POS es facil de usar y administrar, no necesitas ser un experto en tecnologia para usarlo."
+        },
         "basicPlan": {
             "title": "Plan Básico",
-            "description": "El plan ideal para las pequeñas tiendas y restaurantes ."
+            "description": "El plan ideal para las pequeñas tiendas y restaurantes."
         },
         "intermediatePlan": {
             "title": "Plan Intermedio",
@@ -16,10 +29,10 @@
             "title": "Plan Avanzado",
             "description": "Diseñado para grandes cadenas de supermercados y restaurantes."
         },
-        "clientTestimonials": "Opiniones de Clientes",
-        "testimonial1": "\"POSCO ha transformado la manera en que manejamos nuestras ventas.\" - Cliente A",
-        "testimonial2": "\"El mejor sistema POS que hemos utilizado.\" - Cliente B",
-        "testimonial3": "\"Excelente servicio y soporte.\" - Cliente C",
+        "clientTestimonials": "Opiniones de Nuestros Clientes",
+        "testimonial1": "\"POSCO ha transformado la manera en que manejamos nuestras ventas.\" - Fruver Market",
+        "testimonial2": "\"El mejor sistema POS que hemos utilizado, es muy eficiente y lo vemos reflejado todos los dias.\" - Maxi Fruver",
+        "testimonial3": "\"Todo lo que esperabamos de un sistema POS, seguro, confiable y rapido.\" - Caribe Supermercados",
         "recommendedBy": "Empresas que nos recomiendan"
     },
     "Register": {
