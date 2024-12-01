@@ -54,7 +54,7 @@ export function HomeNavbar() {
                     )}
                 </div>
                 <button
-                    className="lg:hidden flex items-center text-white"
+                    className="lg:hidden flex items-center text-black"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     <svg

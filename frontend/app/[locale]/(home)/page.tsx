@@ -24,18 +24,18 @@ export default function LandingPage() {
         <div className="container mx-auto p-4 text-black">
             <header className="flex items-center justify-between my-8">
                 <div className="flex-1 max-w-lg">
-                    <p className="text-gray-500">Software POS de punto de venta</p>
+                    <p className="text-gray-500">{t('headerLanding')}</p>
                     <h2 className="text-4xl font-bold text-black">
-                        Identificación, mail y listo! 
-                        <span className="text-blue-500"> Tu sistema POS </span> 
-                        Fácil y rápido
+                        {t('titleLanding')} 
+                        <span className="text-blue-500"> {t('blueTitle')} </span> 
+                        {t('blackTitle')}
                     </h2>
                     <p className="text-xl mt-2 text-black font-light">{t('subtitle')}</p>
                     <button
                         onClick={handleScrollToPlans}
                         className="bg-blue-500 text-white py-2 px-4 rounded-md max-w-max mt-4 text-lg hover:bg-blue-600 transition duration-200"
                     >
-                        Comienza ya
+                        {t('buttonStart')}
                     </button>
                 </div>
                 <div className="flex-1 flex justify-end">
@@ -54,8 +54,8 @@ export default function LandingPage() {
                         alt="Factura"
                         className="w-16 h-16"                    
                     />
-                    <h2 className=" font-semibold mt-2 text-xl">Facturas rapidas </h2>
-                    <p>Gracias al sistema POS tu negocio generara facturas rapidas y faciles</p>
+                    <h2 className=" font-semibold mt-2 text-xl">{t('advantages.bill')}</h2>
+                    <p>{t('advantages.billDescription') }</p>
                 </div>
                 <div className="w-1/3 m-4">
                     <Image
@@ -63,8 +63,8 @@ export default function LandingPage() {
                         alt="Recompensa"
                         className="w-16 h-16"                    
                     />
-                    <h2 className=" font-semibold mt-2 text-xl">Excelente precio</h2>
-                    <p>Con nuestros planes podras adquirir tu sistema POS a buen precio sin importar el tamaño de tu tienda</p>
+                    <h2 className=" font-semibold mt-2 text-xl">{t('advantages.price')}</h2>
+                    <p>{t('advantages.priceDescription')}</p>
                 </div>
                 <div className="w-1/3 m-4">
                     <Image
@@ -72,8 +72,8 @@ export default function LandingPage() {
                         alt="Aprobado"
                         className="w-16 h-16"                    
                     />
-                    <h2 className=" font-semibold mt-2 text-xl">Facil administracion </h2>
-                    <p>Es facil aprender a usar el sistema POS aunque sea la primera vez que lo usas </p>
+                    <h2 className=" font-semibold mt-2 text-xl"> {t('advantages.easy')} </h2>
+                    <p>{t('advantages.easyDescription')} </p>
                 </div>
                 
             </div>
@@ -88,32 +88,26 @@ export default function LandingPage() {
             </section>
 
             <section className="my-8">
-                <h2 className="text-2xl font-semibold text-center">{t('clientTestimonials')}</h2>
+                <h2 className="text-4xl font-semibold text-center">{t('clientTestimonials')}</h2>
                 <div className="flex flex-wrap justify-center mt-4">
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-                        <div className="px-6 py-4">
+                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 sm:motion-safe:hover:scale-110 transition duration-300 hover:shadow-2xl">
+                        <div className="px-6 py-4 flex">
+                            <Image src={empresa1} alt="Empresa Fruver Market" className="mx-4" width={164} />
                             <p className="text-gray-700 text-base">{t('testimonial1')}</p>
                         </div>
                     </div>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-                        <div className="px-6 py-4">
+                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 sm:motion-safe:hover:scale-110 transition duration-300 hover:shadow-2xl">
+                        <div className="px-6 py-4 flex">
+                            <Image src={empresa2} alt="Empresa Maxi Fruver" className="mx-4" width={164} />
                             <p className="text-gray-700 text-base">{t('testimonial2')}</p>
                         </div>
                     </div>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-                        <div className="px-6 py-4">
+                    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 sm:motion-safe:hover:scale-110 transition duration-300 hover:shadow-2xl">
+                        <div className="px-6 py-4 flex">
+                            <Image src={empresa3} alt="Empresa Caribe Supermercados" className="mx-4" width={164} />
                             <p className="text-gray-700 text-base">{t('testimonial3')}</p>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section className="my-8">
-                <h2 className="text-2xl font-semibold text-center">{t('recommendedBy')}</h2>
-                <div className="flex flex-wrap justify-center mt-4">
-                    <Image src={empresa1} alt="Empresa Fruver Market" className="mx-4" width={128} />
-                    <Image src={empresa2} alt="Empresa Maxi Fruver" className="mx-4" width={128} />
-                    <Image src={empresa3} alt="Empresa Caribe Supermercados" className="mx-4" width={128} />
                 </div>
             </section>
         </div>
