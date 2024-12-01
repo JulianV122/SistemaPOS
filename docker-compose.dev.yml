@@ -8,6 +8,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+      - /app/.next
     ports:
       - "3000:3000"
     networks:
@@ -16,17 +17,8 @@ services:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
-    labels:
-      - traefik.enable=true
-
-      # Router para http
-      - traefik.http.routers.posco-frontend-http.entrypoints=http
-      - traefik.http.routers.posco-frontend-http.rule=Host(`localhost.dev.com`)
-
-      # Router para https
-      - traefik.http.routers.posco-frontend-https.entrypoints=https
-      - traefik.http.routers.posco-frontend-https.rule=Host(`localhost.dev.com`)
-      - traefik.http.routers.posco-frontend-https.tls=true
+      - CHOKIDAR_INTERVAL=1000
+      - FAST_REFRESH=false
 
   backend:
     container_name: posco-backend
@@ -43,15 +35,6 @@ services:
       - .env
     networks:
       - default
-    labels:
-      - traefik.enable=true
-
-      - traefik.http.routers.posco-backend-http.entrypoints=http
-      - traefik.http.routers.posco-backend-http.rule=Host(`localhost.dev.com`) && PathPrefix(`/api`) || PathPrefix(`/docs`) || PathPrefix(`/redoc`)
-
-      - traefik.http.routers.posco-backend-https.entrypoints=https
-      - traefik.http.routers.posco-backend-https.rule=Host(`localhost.dev.com`) && PathPrefix(`/api`) || PathPrefix(`/docs`) || PathPrefix(`/redoc`)
-      - traefik.http.routers.posco-backend-https.tls=true
 
   db:
     image: postgres

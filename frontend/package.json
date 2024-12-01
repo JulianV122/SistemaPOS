@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@primer/octicons-react": "^19.11.0",
+    "axios": "^1.7.2",
     "firebase": "^10.13.2",
     "next": "14.2.7",
     "next-intl": "^3.23.5",
@@ -18,8 +19,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "zod": "^3.23.8",
-    "zustand": "^5.0.0-rc.2",
-    "axios": "^1.7.2"
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
