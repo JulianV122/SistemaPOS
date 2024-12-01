@@ -1,20 +1,20 @@
 {
     "LandingPage": {
-        "subtitle": "Sistemas POS para todo tipo de supermercados y tiendas",
+        "subtitle": "Con nuestro sistemas POS para todo tipo de supermercados y tiendas, gestiona tus ventas de manera eficiente y segura.",
         "welcome": "Bienvenido a POSCO",
         "description": "POSCO se especializa en la venta de sistemas POS (Point of Sale). Ofrecemos un servicio SASS con diferentes planes adaptados a las necesidades de supermercados y tiendas de todos los tamaños.",
-        "servicePlans": "Planes de Servicio",
+        "servicePlans": "Nuestros Planes de Servicio",
         "basicPlan": {
             "title": "Plan Básico",
-            "description": "Ideal para pequeñas tiendas."
+            "description": "El plan ideal para las pequeñas tiendas y restaurantes ."
         },
         "intermediatePlan": {
             "title": "Plan Intermedio",
-            "description": "Perfecto para supermercados medianos."
+            "description": "Perfecto para supermercados y restaurantes medianos."
         },
         "advancedPlan": {
             "title": "Plan Avanzado",
-            "description": "Diseñado para grandes cadenas de supermercados."
+            "description": "Diseñado para grandes cadenas de supermercados y restaurantes."
         },
         "clientTestimonials": "Opiniones de Clientes",
         "testimonial1": "\"POSCO ha transformado la manera en que manejamos nuestras ventas.\" - Cliente A",
