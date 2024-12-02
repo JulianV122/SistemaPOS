@@ -5,10 +5,11 @@ import { useTranslations } from 'next-intl';
 type ServiceCardProps = {
     title: string,
     description: string,
-    price: number
+    price: number,
+    onHireClick: () => void
 }
 
-export function ServiceCard({ title, description, price }: ServiceCardProps) {
+export function ServiceCard({ title, description, price,onHireClick }: ServiceCardProps) {
     const t = useTranslations('ServiceCard');
 
     return (
@@ -21,7 +22,8 @@ export function ServiceCard({ title, description, price }: ServiceCardProps) {
                     <h1 className="font-bold text-6xl">{price}</h1>
                     <p className="font-light">{t('perMonth')}</p>
                 </div>
-                <ButtonPrimary text={t('hire')} />
+                <ButtonPrimary text={t('hire')} onClick={onHireClick} />
+                
             </div>
         </article>
     )

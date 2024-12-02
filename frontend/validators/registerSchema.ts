@@ -27,6 +27,7 @@ export const registerSchema = z.object({
     .max(50, {message: "El campo debe tener maximo 50 caracteres"}),
     
     terms: z.boolean()
-    .refine(data => data === true, {message: "Debes aceptar los terminos y condiciones"})
+    .refine(data => data === true, {message: "Debes aceptar los terminos y condiciones"}),
+
 
 })

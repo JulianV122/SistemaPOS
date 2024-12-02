@@ -18,14 +18,14 @@ export function HomeNavbar() {
         <nav className={`${navbarStyles} relative`}>
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
                 <div className='flex gap-9'>
-                    <div className='mt-1'>
-                        <Image width="100"  src={logo} alt="Logo de Posco." />
+                    <div className="">
+                        <Image width="100" src={logo} alt="Logo de Posco." />
                     </div>
-                    <div className="hidden lg:flex ">
-                        <ul className="flex gap-6 ml-5">
-                            <li><Link href="/" className="text-gray-600 text-xl font-normal	 hover:underline   hover:text-blue-400 ">{t('home')}</Link></li>
-                            <li><Link href="/about" className="text-gray-600 text-xl font-normal hover:underline  hover:text-blue-400">{t('about')}</Link></li>
-                            <li><Link href="/contact" className="text-gray-600 text-xl font-normal hover:underline hover:text-blue-400">{t('contact')}</Link></li>
+                    <div className="hidden lg:flex">
+                        <ul className="flex gap-8">
+                            <li><Link href="/" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('home')}</Link></li>
+                            <li><Link href="/about" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('about')}</Link></li>
+                            <li><Link href="/contact" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('contact')}</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -33,23 +33,25 @@ export function HomeNavbar() {
                 <div className="hidden lg:flex items-center gap-4">
                     <div className="flex items-center gap-2 p-2 border text-black rounded-full">
                         <span className="text-xl">🌎</span>
-                        <Link href={`/${pathname}`} locale="en" className="text-black hover:underline">EN</Link>
-                        <span>|</span>
-                        <Link href={`/${pathname}`} locale="es" className="text-black hover:underline">ES</Link>
+                        <div className="flex items-center">
+                            <Link href={`/${pathname}`} locale="en" className="text-black hover:underline px-2">EN</Link>
+                            <span className="mx-1">|</span>
+                            <Link href={`/${pathname}`} locale="es" className="text-black hover:underline px-2">ES</Link>
+                        </div>
                     </div>
                     {user === null && (
                         <>
                             <Link href="/login">
-                                <ButtonSecondary text={t('login')} />
+                                <ButtonSecondary text={t('login')} customClasses="text-white hover:text-black"/>
                             </Link>
                             <Link href="/register">
-                                <ButtonSecondary text={t('register')} />
+                                <ButtonSecondary text={t('register')} customClasses="text-white hover:text-black"/>
                             </Link>
                         </>
                     )}
                     {user !== null && (
                         <Link href="/dashboard">
-                            <ButtonSecondary text={t('dashboard')} />
+                            <ButtonSecondary text={t('dashboard')} customClasses="text-white hover:text-black"/>
                         </Link>
                     )}
                 </div>
@@ -70,32 +72,34 @@ export function HomeNavbar() {
             </div>
 
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-16 left-0 w-full bg-cyan-800 z-40 p-6 rounded-lg shadow-lg">
+                <div className="lg:hidden absolute top-16 left-0 w-full bg-cyan-700 z-40 p-6 rounded-lg shadow-lg">
                     <ul className="flex flex-col items-center gap-4">
-                        <li><Link href="/" className="text-white hover:bg-cyan-600 px-4 py-2 rounded transition duration-200" onClick={() => setIsMenuOpen(false)}>{t('home')}</Link></li>
-                        <li><Link href="/about" className="text-white hover:bg-cyan-600 px-4 py-2 rounded transition duration-200" onClick={() => setIsMenuOpen(false)}>{t('about')}</Link></li>
-                        <li><Link href="/contact" className="text-white hover:bg-cyan-600 px-4 py-2 rounded transition duration-200" onClick={() => setIsMenuOpen(false)}>{t('contact')}</Link></li>
+                        <li><Link href="/" className="text-black hover:text-cyan-800 hover:bg-white px-4 py-2 rounded transition duration-200 ease-in-out">{t('home')}</Link></li>
+                        <li><Link href="/about" className="text-black hover:text-cyan-800 hover:bg-white px-4 py-2 rounded transition duration-200 ease-in-out">{t('about')}</Link></li>
+                        <li><Link href="/contact" className="text-black hover:text-cyan-800 hover:bg-white px-4 py-2 rounded transition duration-200 ease-in-out">{t('contact')}</Link></li>
                     </ul>
                     <div className="flex flex-col items-center gap-4 mt-4">
                         <div className="flex items-center gap-2 p-2 bg-white text-black rounded-full">
                             <span className="text-xl">🌎</span>
-                            <Link href={`/${pathname}`} locale="en" className="text-black hover:underline">EN</Link>
-                            <span>|</span>
-                            <Link href={`/${pathname}`} locale="es" className="text-black hover:underline">ES</Link>
+                            <div className="flex items-center">
+                                <Link href={`/${pathname}`} locale="en" className="text-black hover:underline px-2">EN</Link>
+                                <span className="mx-1">|</span>
+                                <Link href={`/${pathname}`} locale="es" className="text-black hover:underline px-2">ES</Link>
+                            </div>
                         </div>
                         {user === null && (
                             <>
                                 <Link href="/login">
-                                    <ButtonSecondary text={t('login')} />
+                                    <ButtonSecondary text={t('login')} customClasses="text-white hover:text-black"/>
                                 </Link>
                                 <Link href="/register">
-                                    <ButtonSecondary text={t('register')} />
+                                    <ButtonSecondary text={t('register')} customClasses="text-white hover:text-black"/>
                                 </Link>
                             </>
                         )}
                         {user !== null && (
                             <Link href="/dashboard">
-                                <ButtonSecondary text={t('dashboard')} />
+                                <ButtonSecondary text={t('dashboard')} customClasses="text-white hover:text-black"/>
                             </Link>
                         )}
                     </div>

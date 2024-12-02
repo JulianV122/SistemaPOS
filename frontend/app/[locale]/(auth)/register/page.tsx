@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Register } from '@/components';
+import { StepperRegister } from '@/components';
 import { AuthRedirect } from '@/components';
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export default function register() {
   return (
     <AuthRedirect>
       <div className="register">
-          <Register />
+          <StepperRegister />
       </div>
     </AuthRedirect>
   )

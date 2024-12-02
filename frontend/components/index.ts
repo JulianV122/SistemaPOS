@@ -23,4 +23,7 @@ export * from './molecules/PermissionAuth'
 export * from './molecules/UserAuth'
 export * from './molecules/UserSession'
 export * from './molecules/AuthRedirect'
+export * from './screens/StepperRegister'
+export * from './screens/RegisterEnterprise'
+export * from './screens/Plans'
 export { Loader } from './atoms/Loader';

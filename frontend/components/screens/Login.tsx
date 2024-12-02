@@ -1,9 +1,11 @@
 'use client';
-
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from '@/i18n/routing';
+
+import { backgroundLandingImage } from "@/public";
+import Image from 'next/image';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { loginUser } from '@/services/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -27,7 +29,9 @@ export function Login() {
         formState: { errors },
     } = useForm<Inputs>({
         resolver: zodResolver(loginSchema)
-    })
+    });
+
+    const router = useRouter();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
@@ -43,41 +47,55 @@ export function Login() {
                 message: error.response?.data?.detail || 'Error al iniciar sesión'
             });
         }
-    }
+    };
 
     return (
-        <div className="w-full max-w-xl">
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                        {t('email')}
-                    </label>
-                    <input
-                        className={`shadow appearance-none border ${errors.email ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                        id="email"
-                        type="email"
-                        placeholder={t('emailPlaceholder')}
-                        {...register("email")}
-                    />
-                    {errors.email && <p className="text-red-500 text-xs italic">{t('emailError')}</p>}
+        <div><HomeNavbar />
+            <div className="flex flex-col lg:flex-row h-screen bg-gray-100">
+
+                <div className="flex-1 flex flex-col relative">
+                    <Image src={backgroundLandingImage} alt="Background Image" layout="fill" objectFit="cover" className="opacity-50" />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                        {t('password')}
-                    </label>
-                    <input
-                        className={`shadow appearance-none border ${errors.password ? 'border-red-500' : ''} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
-                        id="password"
-                        type="password"
-                        placeholder={t('passwordPlaceholder')}
-                        {...register("password")}
-                    />
-                    {errors.password && <p className="text-red-500 text-xs italic">{t('passwordError')}</p>}
+                <div className="flex-1 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
+                    <div className="w-full max-w-md">
+                        <form className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+                            <h2 className="text-2xl font-bold text-center text-sky-950 mb-6">{t('loginTitle')}</h2>
+
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                    {t('email')}
+                                </label>
+                                <input
+                                    className={`shadow appearance-none border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out`}
+                                    id="email"
+                                    type="email"
+                                    placeholder={t('emailPlaceholder')}
+                                    {...register("email", { required: t('emailError') })}
+                                />
+                                {errors.email && <p className="text-red-500 text-xs italic">{t('emailError')}</p>}
+                            </div>
+
+                            <div className="mb-6">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                    {t('password')}
+                                </label>
+                                <input
+                                    className={`shadow appearance-none border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out`}
+                                    id="password"
+                                    type="password"
+                                    placeholder={t('passwordPlaceholder')}
+                                    {...register("password", { required: t('passwordError') })}
+                                />
+                                {errors.password && <p className="text-red-500 text-xs italic">{t('passwordError')}</p>}
+                            </div>
+
+                            <div className="w-full flex justify-center">
+                                <ButtonPrimary text={t('submit')} />
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div className="w-full flex justify-center">
-                    <ButtonPrimary text={t('submit')} />
-                </div>
-            </form>
-        </div>
+            </div>
+      </div>
     );
 }

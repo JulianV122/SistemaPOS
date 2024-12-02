@@ -57,7 +57,8 @@
         "repeatPasswordError": "The repeat password field is invalid",
         "acceptTerms": "I accept the terms and conditions",
         "termsError": "You must accept the terms and conditions",
-        "registerButton": "Register"
+        "registerButton": "Register",
+        "registerTitle": "User Register"
     },
     "Login": {
         "email": "Email",
@@ -66,7 +67,8 @@
         "password": "Password",
         "passwordPlaceholder": "Password",
         "passwordError": "The password field is invalid",
-        "submit": "Login"
+        "submit": "Login",
+        "loginTitle":"Login"
     },
     "HomeNavbar": {
         "home": "Home",
@@ -144,12 +146,57 @@
     "ButtonDelete": {
         "text": "Delete"
     },
-    "ButtonEdit":{
+    "ButtonEdit": {
         "text": "Edit"
     },
     "AuthRedirect": {
         "redirectMessage": "You are already logged in. Redirecting to dashboard..."
     },
+    "RegisterEnterprise": {
+        "name": "Name",
+        "namePlaceholder": "Enter your name",
+        "nameError": "The name field is invalid",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "emailRequired": "This field is required",
+        "emailError": "The email field is invalid",
+        "number": "Phone Number",
+        "numberPlaceholder": "Enter your phone number",
+        "numberError": "The phone number field is invalid",
+        "city": "City",
+        "cityPlaceholder": "Enter your city",
+        "cityError": "The city field is invalid",
+        "registerButton": "Register",
+        "nit": "Nit",
+        "nitPlaceholder": "Enter your Nit",
+        "nitError": "Nit is required",
+        "registerEnterpriseTitle": "Enterprise Register"
+    },
+    "Plans": {
+        "choosePlan": "Choose your plan",
+        "hirePlan": "Hire Plan",
+        "paymentDetails": "Payment Details",
+        "processingPayment": "Processing payment...",
+        "paymentSuccess": "Payment successful!",
+        "close": "Close",
+        "cardNumber": "Card Number",
+        "cardNumberPlaceholder": "Enter your card number",
+        "expiryDate": "Expiry Date",
+        "expiryDatePlaceholder": "MM/YY",
+        "payNow": "Pay Now",
+        "cancel": "Cancel",
+        "basicPlan": {
+            "title": "Basic Plan",
+            "description": "Ideal for small stores."
+        },
+        "intermediatePlan": {
+            "title": "Intermediate Plan",
+            "description": "Perfect for medium-sized supermarkets."
+        },
+        "advancedPlan": {
+            "title": "Advanced Plan",
+            "description": "Designed for large supermarket chains."
+        }
     "About": {
         "titleBlue": "We are a team",
         "title": "dedicated to creating POS systems for supermarkets and stores.",
