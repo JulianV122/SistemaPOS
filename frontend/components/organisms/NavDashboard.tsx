@@ -63,7 +63,7 @@ export function NavDashboard() {
             </div>
             <div className="p-4">
 
-                <button onClick={logout} className={` w-full ${buttonSecondary}`}>{t('logout')}</button>
+                <button onClick={logout} className={` w-full text-white hover:bg-gray-700  ${buttonSecondary}`}>{t('logout')}</button>
             </div>
         </aside>
     );

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from '@/i18n/routing';
+import { HomeNavbar } from '@/components';
 
 import { backgroundLandingImage } from "@/public";
 import Image from 'next/image';
@@ -31,8 +32,6 @@ export function Login() {
         resolver: zodResolver(loginSchema)
     });
 
-    const router = useRouter();
-
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
             await loginUser(data.email, data.password);
@@ -58,7 +57,7 @@ export function Login() {
                 </div>
                 <div className="flex-1 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8">
                     <div className="w-full max-w-md">
-                        <form className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+                        <form className="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)} >
                             <h2 className="text-2xl font-bold text-center text-sky-950 mb-6">{t('loginTitle')}</h2>
 
                             <div className="mb-4">

@@ -23,9 +23,9 @@ export function HomeNavbar() {
                     </div>
                     <div className="hidden lg:flex">
                         <ul className="flex gap-8">
-                            <li><Link href="/" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('home')}</Link></li>
-                            <li><Link href="/about" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('about')}</Link></li>
-                            <li><Link href="/contact" className="text-white hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('contact')}</Link></li>
+                            <li><Link href="/" className="text-black hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('home')}</Link></li>
+                            <li><Link href="/about" className="text-black hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('about')}</Link></li>
+                            <li><Link href="/contact" className="text-black hover:text-neutral-400 hover:border-b-2 hover:border-neutral-400 transition duration-200 ease-in-out">{t('contact')}</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -42,16 +42,16 @@ export function HomeNavbar() {
                     {user === null && (
                         <>
                             <Link href="/login">
-                                <ButtonSecondary text={t('login')} customClasses="text-white hover:text-black"/>
+                                <ButtonSecondary text={t('login')} customClasses="text-black hover:text-gray"/>
                             </Link>
                             <Link href="/register">
-                                <ButtonSecondary text={t('register')} customClasses="text-white hover:text-black"/>
+                                <ButtonSecondary text={t('register')} customClasses="text-black hover:text-gray"/>
                             </Link>
                         </>
                     )}
                     {user !== null && (
                         <Link href="/dashboard">
-                            <ButtonSecondary text={t('dashboard')} customClasses="text-white hover:text-black"/>
+                            <ButtonSecondary text={t('dashboard')} customClasses="text-black hover:text-gray"/>
                         </Link>
                     )}
                 </div>
