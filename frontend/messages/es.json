@@ -149,5 +149,22 @@
     },
     "AuthRedirect": {
         "redirectMessage": "Ya estas logueado, redirigiendo al dashboard..."
+    },
+    "About":{
+        "titleBlue": "Somos un equipo",
+        "title": "que se dedica a la creación de sistemas POS para supermercados y tiendas.",
+        "description": "POSCO es una empresa que se dedica a la creación de sistemas POS para supermercados y tiendas. Nuestro objetivo es ofrecer un sistema POS fácil de usar y eficiente para todo tipo de tiendas. Nuestro equipo está conformado por expertos en tecnología y ventas, lo que nos permite ofrecer un sistema POS de alta calidad y adaptado a las necesidades de nuestros clientes.",
+        "vision": "| Nuestra Visión",
+        "mision": "| Nuestra Misión",
+        "visionDescription": "Ser la empresa líder en la creación de sistemas POS para supermercados y tiendas en América Latina.",
+        "misionDescription": "Ofrecer un sistema POS fácil de usar y eficiente para todo tipo de tiendas, con el objetivo de mejorar la gestión de ventas y aumentar la productividad de nuestros clientes."
+    },
+    "Contact":{
+        "title": "Tienes alguna pregunta?",
+        "subtitle": "Estamos aquí para ayudarte. Si tienes alguna pregunta o inquietud, no dudes en contactarnos.",
+        "support": "Conoce el mejor producto para impulsar tu negocio",
+        "call": "Llama al 310 123 8123",
+        "chat": "Soluciona tus dudas en segundos",
+        "contactSupport": "Contactar a soporte"
     }
 }
