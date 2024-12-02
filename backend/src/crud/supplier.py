@@ -14,4 +14,14 @@ class CRUDSupplier(CRUDBase[Supplier, SupplierCreate, SupplierUpdate]):
         supplier = self.get(session=session, id=supplier_id)
         return supplier.products if supplier else []
 
+    def get_by_nit_and_enterprise(
+        self, session: Session, *, nit: str, enterprise_id: int
+    ) -> Optional[Supplier]:
+        return session.exec(
+            select(Supplier).where(
+                Supplier.NIT == nit,
+                Supplier.enterprise_id == enterprise_id
+            )
+        ).first()
+
 supplier = CRUDSupplier(Supplier)

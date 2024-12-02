@@ -12,6 +12,8 @@ class Enterprise(EnterpriseBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     employees: List["Employee"] = Relationship(back_populates="enterprise")
     products: List["Product"] = Relationship(back_populates="enterprise")
+    categories: List["Category"] = Relationship(back_populates="enterprise")
+    suppliers: List["Supplier"] = Relationship(back_populates="enterprise")
 
 class EnterpriseCreate(EnterpriseBase):
     pass
