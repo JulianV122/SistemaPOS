@@ -26,4 +26,5 @@ export * from './molecules/AuthRedirect'
 export * from './screens/StepperRegister'
 export * from './screens/RegisterEnterprise'
 export * from './screens/Plans'
+export * from './organisms/PlansCard'
 export { Loader } from './atoms/Loader';

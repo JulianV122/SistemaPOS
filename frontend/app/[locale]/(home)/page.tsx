@@ -7,6 +7,7 @@ import { ServiceCard } from "@/components";
 import { Link, usePathname } from '@/i18n/routing';
 import { ButtonSecondary } from "@/components";
 import Image from "next/image";
+import { PlansCard } from "@/components";
 
 
 
@@ -81,9 +82,9 @@ export default function LandingPage() {
             <section id="servicePlans" className="my-8  ">
                 <h2 className="text-4xl font-semibold text-center mb-8">{t('servicePlans')}</h2>
                 <div className="flex flex-wrap justify-center mt-4">
-                    <ServiceCard title={t('basicPlan.title')} description={t('basicPlan.description')} price={15900}  />
-                    <ServiceCard title={t('intermediatePlan.title')} description={t('intermediatePlan.description')} price={29900} />
-                    <ServiceCard title={t('advancedPlan.title')} description={t('advancedPlan.description')} price={49900} />
+                    <PlansCard title={t('basicPlan.title')} description={t('basicPlan.description')} price={15900} />
+                    <PlansCard title={t('intermediatePlan.title')} description={t('intermediatePlan.description')} price={29900} />
+                    <PlansCard title={t('advancedPlan.title')} description={t('advancedPlan.description')} price={49900} />
                 </div>
             </section>
 
