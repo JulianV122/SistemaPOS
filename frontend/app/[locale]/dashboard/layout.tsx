@@ -9,8 +9,8 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <>
-        {/* <UserAuth> */}
+        
+        <UserAuth>
         <div className="flex h-screen bg-white">            
             <NavDashboard/>
             <div className="flex-grow ">
@@ -20,8 +20,8 @@ export default function DashboardLayout({
             </div>
             </div>
         </div>
-        {/* </UserAuth> */}
-        </>
+        </UserAuth>
+        
     );
 }
 
