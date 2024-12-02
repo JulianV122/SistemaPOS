@@ -12,7 +12,10 @@ import { RegisterEnterprise } from './RegisterEnterprise';
 import PersonIcon from '@mui/icons-material/Person';
 import BusinessIcon from '@mui/icons-material/Business';
 import EmailIcon from '@mui/icons-material/Email';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+
 import { Plans } from './Plans';
+import { HomeNavbar } from '../molecules/HomeNavbar';
 
 const steps = ['1', '2', '3'];
 
@@ -42,12 +45,14 @@ export function StepperRegister() {
 
     return (
         <div className='bg-white'>
-            <div className="flex justify-center py-10">
+            <HomeNavbar />
+            <div className="flex justify-center  p-8  border-2 border-blue-950  rounded-full mx-auto mt-2 ">
+
                 <Stepper activeStep={activeStep} sx={{
-                    width: '70%',
+                    width: '40%',
                     '& .MuiStepIcon-root': {
-                        width: '50px',
-                        height: '50px',
+                        width: '30px',
+                        height: '30px',
                         fontSize: '3rem',
                     },
                 }}>
@@ -62,7 +67,7 @@ export function StepperRegister() {
                         } else if (index === 1) {
                             icon = <BusinessIcon />;
                         } else if (index === 2) {
-                            icon = <EmailIcon />;
+                            icon = <ShoppingCartCheckoutIcon />;
                         }
 
                         return (
@@ -75,8 +80,8 @@ export function StepperRegister() {
             </div>
 
             <br />
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="flex justify-center rounded-3xl bg-slate-50 w-full max-w-5xl p-2">
+            <div className="flex items-center justify-center pb-14">
+                <div className="flex justify-center rounded-3xl bg-slate-50 w-full max-w-5xl ">
                     {activeStep === 0 && <Register handleNext={handleNext} />}
                     {activeStep === 1 && <RegisterEnterprise handleNext={handleNext} />}
                     {activeStep === 2 && <Plans />}

@@ -44,7 +44,8 @@
         "repeatPasswordError": "The repeat password field is invalid",
         "acceptTerms": "I accept the terms and conditions",
         "termsError": "You must accept the terms and conditions",
-        "registerButton": "Register"
+        "registerButton": "Register",
+        "registerTitle": "User Register"
     },
     "Login": {
         "email": "Email",
@@ -53,7 +54,8 @@
         "password": "Password",
         "passwordPlaceholder": "Password",
         "passwordError": "The password field is invalid",
-        "submit": "Login"
+        "submit": "Login",
+        "loginTitle":"Login"
     },
     "HomeNavbar": {
         "home": "Home",
@@ -154,7 +156,8 @@
         "registerButton": "Register",
         "nit": "Nit",
         "nitPlaceholder": "Enter your Nit",
-        "nitError": "Nit is required"
+        "nitError": "Nit is required",
+        "registerEnterpriseTitle": "Enterprise Register"
     },
     "Plans": {
         "choosePlan": "Choose your plan",
@@ -181,5 +184,6 @@
             "title": "Advanced Plan",
             "description": "Designed for large supermarket chains."
         }
+
     }
 }

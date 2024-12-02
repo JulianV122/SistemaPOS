@@ -28,17 +28,28 @@ export function Plans() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-semibold text-center mb-8">{t('choosePlan')}</h2>
-
-            <div className="flex flex-wrap justify-center mt-4">
-                <ServiceCard title={t('basicPlan.title')} description={t('basicPlan.description')} price={15900} />
-                <ServiceCard title={t('intermediatePlan.title')} description={t('intermediatePlan.description')} price={29900} />
-                <ServiceCard title={t('advancedPlan.title')} description={t('advancedPlan.description')} price={49900} />
-            </div>
-
-            <div className="mt-8">
-                <ButtonPrimary text={t('hirePlan')} onClick={handleHireClick} />
+        <div className="flex flex-col items-center justify-center pb-9">
+            <br/>
+            <h1 className="text-2xl font-semibold text-center mb-8">{t('choosePlan')}</h1>
+            <div className="flex flex-wrap justify-center ">
+                <ServiceCard
+                    title={t('basicPlan.title')}
+                    description={t('basicPlan.description')}
+                    price={15900}
+                    onHireClick={handleHireClick}
+                />
+                <ServiceCard
+                    title={t('intermediatePlan.title')}
+                    description={t('intermediatePlan.description')}
+                    price={29900}
+                    onHireClick={handleHireClick}
+                />
+                <ServiceCard
+                    title={t('advancedPlan.title')}
+                    description={t('advancedPlan.description')}
+                    price={49900}
+                    onHireClick={handleHireClick}
+                />
             </div>
 
             {isModalOpen && (
@@ -50,7 +61,7 @@ export function Plans() {
                             <div className="text-center">
                                 <p>{t('processingPayment')}</p>
                                 <div className="mt-4 animate-pulse">...</div>
-                            </div>  
+                            </div>
                         ) : paymentSuccess ? (
                             <div className="text-center">
                                 <p className="text-green-600">{t('paymentSuccess')}</p>
@@ -68,6 +79,7 @@ export function Plans() {
                                             id="cardNumber"
                                             className="border-gray-300 rounded w-full py-2 px-3 text-gray-700"
                                             placeholder={t('cardNumberPlaceholder')}
+                                            required
                                         />
                                     </div>
 
@@ -80,6 +92,7 @@ export function Plans() {
                                             id="expiryDate"
                                             className="border-gray-300 rounded w-full py-2 px-3 text-gray-700"
                                             placeholder={t('expiryDatePlaceholder')}
+                                            required
                                         />
                                     </div>
 

@@ -38,13 +38,13 @@ export function Register({ handleNext }: RegisterProps) {
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
-        router.push('/login');
         registerUser(data.email, data.password, data.name, data.lastname, data.telephone);
         handleNext();
     };
 
     return (
         <div className="w-full max-w-4xl mx-auto p-2  bg-slate-50">
+            <h1 className="text-2xl font-semibold text-center mb-8">{t('registerTitle')}</h1> 
             <form className=" bg-slate-50  p-8" onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div>
@@ -154,7 +154,6 @@ export function Register({ handleNext }: RegisterProps) {
                 <div className="w-full mb-6 flex justify-center">
                     <ButtonPrimary text={t('registerButton')} />
                 </div>
-                <input type="submit" />
             </form>
         </div>
     );

@@ -29,6 +29,5 @@ export const registerSchema = z.object({
     terms: z.boolean()
     .refine(data => data === true, {message: "Debes aceptar los terminos y condiciones"}),
 
-    nit: z.string().min(1, { message: 'Nit is required' }), 
 
 })

@@ -1,14 +1,14 @@
 import { buttonSecondary } from "../tokens"
 
 type ButtonSecondaryProps = {
-    text: string
+    text: string,
+    customClasses?: string
 }
 
-export function ButtonSecondary({text}: ButtonSecondaryProps) {
+export function ButtonSecondary({text, customClasses = ""}: ButtonSecondaryProps) {
     return (
-        <button className={buttonSecondary}>
+        <button className={`${buttonSecondary} ${customClasses}`}>
             {text}
         </button>
     )
 }
-

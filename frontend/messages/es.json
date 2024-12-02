@@ -44,7 +44,8 @@
         "repeatPasswordError": "El campo repetir contraseña es inválido",
         "acceptTerms": "Acepto los términos y condiciones",
         "termsError": "Se debe aceptar los términos y condiciones",
-        "registerButton": "Registrarse"
+        "registerButton": "Registrarse",
+        "registerTitle": "Registro Usuario "
     },
     "Login": {
         "email": "Correo Electrónico",
@@ -53,7 +54,8 @@
         "password": "Contraseña",
         "passwordPlaceholder": "Contraseña",
         "passwordError": "El campo contraseña es inválido",
-        "submit": "Ingresar"
+        "submit": "Ingresar",
+        "loginTitle":"Iniciar sesión"
     },
     "HomeNavbar": {
         "home": "Inicio",
@@ -154,7 +156,8 @@
         "registerButton": "Registrarse",
         "nit": "Nit",
         "nitPlaceholder": "Enter your Nit",
-        "nitError": "Nit is required"
+        "nitError": "Nit is required",
+        "registerEnterpriseTitle": "Registro Empresa"
     },
     "Plans": {
         "choosePlan": "Elige tu plan",

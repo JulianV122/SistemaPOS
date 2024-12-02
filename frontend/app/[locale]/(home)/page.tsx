@@ -30,7 +30,7 @@ export default function LandingPage() {
             <section className="my-8">
                 <h2 className="text-2xl font-semibold text-center">{t('servicePlans')}</h2>
                 <div className="flex flex-wrap justify-center mt-4">
-                    <ServiceCard title={t('basicPlan.title')} description={t('basicPlan.description')} price={15900} />
+                    <ServiceCard title={t('basicPlan.title')} description={t('basicPlan.description')} price={15900}  />
                     <ServiceCard title={t('intermediatePlan.title')} description={t('intermediatePlan.description')} price={29900} />
                     <ServiceCard title={t('advancedPlan.title')} description={t('advancedPlan.description')} price={49900} />
                 </div>
