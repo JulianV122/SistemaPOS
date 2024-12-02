@@ -3,18 +3,25 @@ import api from '../config/api';
 export interface Supplier {
     id: number;
     name: string;
-    NIT: string;
     email: string;
-    phone: string;
-    address: string;
+    NIT: string;
+    phone_number: string;
+    enterprise_id: number;
 }
 
 export interface SupplierCreate {
     name: string;
-    NIT: string;
     email: string;
-    phone: string;
-    address: string;
+    NIT: string;
+    phone_number: string;
+    enterprise_id: number;
+}
+
+export interface SupplierUpdate {
+    name?: string;
+    email?: string;
+    NIT?: string;
+    phone_number?: string;
 }
 
 export const supplierService = {
@@ -33,7 +40,7 @@ export const supplierService = {
         return response.data;
     },
 
-    async update(id: number, data: Partial<SupplierCreate>) {
+    async update(id: number, data: SupplierUpdate) {
         const response = await api.put(`/suppliers/${id}`, data);
         return response.data;
     },

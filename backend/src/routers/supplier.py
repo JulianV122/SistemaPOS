@@ -21,7 +21,7 @@ def read_suppliers(
     """
     suppliers = crud.get_by_enterprise(
         session=session,
-        enterprise_id=current_employee.enterprise_id,
+        enterprise_id=current_employee.enterprise.id,
         skip=skip,
         limit=limit
     )
