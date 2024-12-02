@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from '@/i18n/routing';
 import { useUserSession } from "@/store/userSession"; 
 import { useTranslations } from 'next-intl';
+import { showAlert } from '@/components/atoms/Alert';
 
 type PermissionAuthProps = {
     children: React.ReactNode;
@@ -17,10 +18,12 @@ export function PermissionAuth({ children, requiredPermission }: PermissionAuthP
 
     useEffect(() => {
         if (!user) {
-            alert(t('redirectMessage')); // Mensaje de redirección
             router.replace('/login'); 
         } else if (!user.permissions.includes(requiredPermission)) {
-            alert(t('noPermissionMessage')); // Mensaje de permiso denegado
+            showAlert({
+                type: 'error',
+                message: t('noPermissionMessage')
+            });
             router.replace('/dashboard'); 
         }
     }, [user, requiredPermission, router, t]);

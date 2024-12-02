@@ -91,7 +91,8 @@ export function AddEmployeeModal({ isOpen, onClose, onSuccess }: AddEmployeeModa
                             <label className="block text-sm font-medium text-gray-700">Rol</label>
                             <select {...register("role_id", { valueAsNumber: true })} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                                 <option value={1}>Administrador</option>
-                                <option value={2}>Usuario</option>
+                                <option value={2}>Empleado</option>
+                                <option value={3}>Vendedor</option>
                             </select>
                             {errors.role_id && <span className="text-red-500 text-sm">{errors.role_id.message}</span>}
                         </div>

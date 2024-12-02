@@ -114,6 +114,8 @@
         "manageEmployees": "Gestionar Empleados",
         "manageInventory": "Gestionar Inventario",
         "financialReports": "Reportes Financieros",
+        "manageSuppliers": "Gestionar proveedores",
+        "manageCashier": "Caja",
         "logout": "Cerrar sesión"
     },
     "ServiceCard": {

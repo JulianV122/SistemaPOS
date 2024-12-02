@@ -4,30 +4,48 @@ export interface Product {
     id: number;
     name: string;
     description: string;
-    price: number;
+    bar_code: string;
+    supplier_price: number;
+    public_price: number;
     stock: number;
-    bar_code?: string;
+    minimal_safe_stock: number;
+    status: boolean;
+    thumbnail: string;
+    discount: number;
     enterprise_id: number;
-    category_id?: number;
+    category_id: number;
+    supplier_id: number;
 }
 
 export interface ProductCreate {
     name: string;
     description: string;
-    price: number;
+    bar_code: string;
+    supplier_price: number;
+    public_price: number;
     stock: number;
-    bar_code?: string;
+    minimal_safe_stock: number;
+    status: string;
+    thumbnail: string;
+    discount: number;
     enterprise_id: number;
-    category_id?: number;
+    category_id: number;
+    supplier_id: number;
 }
 
 export interface ProductUpdate {
     name?: string;
     description?: string;
-    price?: number;
-    stock?: number;
     bar_code?: string;
+    supplier_price?: number;
+    public_price?: number;
+    stock?: number;
+    minimal_safe_stock?: number;
+    status?: boolean;
+    thumbnail?: string;
+    discount?: number;
     category_id?: number;
+    supplier_id?: number;
 }
 
 export const productService = {
@@ -38,6 +56,11 @@ export const productService = {
 
     async getById(id: number) {
         const response = await api.get(`/products/${id}`);
+        return response.data;
+    },
+
+    async getByCategory(categoryId: number, skip: number = 0, limit: number = 100) {
+        const response = await api.get(`/products/category/${categoryId}?skip=${skip}&limit=${limit}`);
         return response.data;
     },
 

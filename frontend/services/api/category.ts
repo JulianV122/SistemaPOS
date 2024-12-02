@@ -4,11 +4,18 @@ export interface Category {
     id: number;
     name: string;
     description: string;
+    enterprise_id: number;
 }
 
 export interface CategoryCreate {
     name: string;
     description: string;
+    enterprise_id: number;
+}
+
+export interface CategoryUpdate {
+    name?: string;
+    description?: string;
 }
 
 export const categoryService = {
@@ -27,7 +34,7 @@ export const categoryService = {
         return response.data;
     },
 
-    async update(id: number, data: Partial<CategoryCreate>) {
+    async update(id: number, data: CategoryUpdate) {
         const response = await api.put(`/categories/${id}`, data);
         return response.data;
     },

@@ -38,13 +38,13 @@ def create_supplier(
     Create new supplier.
     """
     # Asignar la empresa del empleado actual
-    supplier_in.enterprise_id = current_employee.enterprise_id
+    supplier_in.enterprise_id = current_employee.enterprise.id
     
     # Verificar si ya existe un proveedor con el mismo NIT en la misma empresa
     existing_supplier = crud.get_by_nit_and_enterprise(
         session=session,
         nit=supplier_in.NIT,
-        enterprise_id=current_employee.enterprise_id
+        enterprise_id=current_employee.enterprise.id
     )
     if existing_supplier:
         raise HTTPException(
@@ -118,7 +118,7 @@ def delete_supplier(
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
     
     # Verificar que el proveedor pertenece a la empresa del empleado
-    if supplier.enterprise_id != current_employee.enterprise_id:
+    if supplier.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para eliminar este proveedor"

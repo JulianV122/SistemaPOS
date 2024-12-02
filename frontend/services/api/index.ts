@@ -12,26 +12,14 @@ export * from './role';
 
 import { authService } from './auth';
 import { employeeService } from './employee';
-import { productService } from './product';
-import { saleService } from './sale';
 import { supplierService } from './supplier';
 import { categoryService } from './category';
-import { clientService } from './client';
-import { enterpriseService } from './enterprise';
-import { invoiceService } from './invoice';
-import { permissionService } from './permission';
-import { roleService } from './role';
+import { productService } from './product';
 
 export const services = {
     auth: authService,
     employee: employeeService,
-    product: productService,
-    sale: saleService,
     supplier: supplierService,
     category: categoryService,
-    client: clientService,
-    enterprise: enterpriseService,
-    invoice: invoiceService,
-    permission: permissionService,
-    role: roleService
+    product: productService
 };

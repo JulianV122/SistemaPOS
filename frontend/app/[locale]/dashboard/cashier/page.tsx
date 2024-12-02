@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { factura } from "@/public";
 import { ButtonPrimary, ButtonSecondary } from "@/components";
-import { buttonPrimary } from '../../../../components/tokens';
+import { PermissionAuth } from "@/components";
+
 
 export const metadata: Metadata = {
     title: "Cash Management",
@@ -34,29 +35,33 @@ export default function Cash() {
     ];
 
     return (
-        <div className="w-full h-screen flex p-4">
-            <div className="flex-grow grid grid-cols-4 gap-4 overflow-y-auto h-4/5 bg-cyan-800 p-6 rounded-md">
-                {products.map((product) => (
-                    <div key={product.id} className="border p-4 flex flex-col items-center bg-white rounded shadow-md">
-                        <Image
-                            src={factura}
-                            alt="Factura"
-                            className="w-16 h-16"
-                        />
-                        <h2 className="mt-2 text-lg text-black font-bold">{product.name}</h2>
-                        <p className="text-gray-600 m-1">{product.price}</p>
-                        <ButtonPrimary text="Añadir Producto" />
-                    </div>
-                ))}
-            </div>
+        <PermissionAuth requiredPermission="GESTIONAR_VENTAS">
 
-            <div className="flex flex-col space-y-4 ml-4 w-1/6 mt-5 justify-start">
-                <ButtonSecondary text="Buscar por nombre" />
-                <ButtonSecondary text="Buscar por categoria" />
-                <ButtonSecondary text="Resumen venta" />
-                <ButtonSecondary text="Eliminar producto" />
-                <ButtonSecondary text="Pagar" />
+
+            <div className="w-full h-screen flex p-4">
+                <div className="flex-grow grid grid-cols-4 gap-4 overflow-y-auto h-4/5 bg-cyan-800 p-6 rounded-md">
+                    {products.map((product) => (
+                        <div key={product.id} className="border p-4 flex flex-col items-center bg-white rounded shadow-md">
+                            <Image
+                                src={factura}
+                                alt="Factura"
+                                className="w-16 h-16"
+                            />
+                            <h2 className="mt-2 text-lg text-black font-bold">{product.name}</h2>
+                            <p className="text-gray-600 m-1">{product.price}</p>
+                            <ButtonPrimary text="Añadir Producto" />
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex flex-col space-y-4 ml-4 w-1/6 mt-5 justify-start">
+                    <ButtonSecondary text="Buscar por nombre" />
+                    <ButtonSecondary text="Buscar por categoria" />
+                    <ButtonSecondary text="Resumen venta" />
+                    <ButtonSecondary text="Eliminar producto" />
+                    <ButtonSecondary text="Pagar" />
+                </div>
             </div>
-        </div>
+        </PermissionAuth>
     );
 }

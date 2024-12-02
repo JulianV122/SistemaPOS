@@ -21,7 +21,7 @@ def read_categories(
     """
     categories = crud.get_by_enterprise(
         session=session,
-        enterprise_id=current_employee.enterprise_id,
+        enterprise_id=current_employee.enterprise.id,
         skip=skip,
         limit=limit
     )
@@ -38,7 +38,7 @@ def create_category(
     Create new category.
     """
     # Asignar la empresa del empleado actual
-    category_in.enterprise_id = current_employee.enterprise_id
+    category_in.enterprise_id = current_employee.enterprise.id
     
     category = crud.create(session=session, obj_in=category_in)
     return category
@@ -58,7 +58,7 @@ def read_category(
         raise HTTPException(status_code=404, detail="Category not found")
     
     # Verificar que la categoría pertenece a la empresa del empleado
-    if category.enterprise_id != current_employee.enterprise_id:
+    if category.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para ver esta categoría"
@@ -82,7 +82,7 @@ def update_category(
         raise HTTPException(status_code=404, detail="Category not found")
     
     # Verificar que la categoría pertenece a la empresa del empleado
-    if category.enterprise_id != current_employee.enterprise_id:
+    if category.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para actualizar esta categoría"
@@ -106,7 +106,7 @@ def delete_category(
         raise HTTPException(status_code=404, detail="Category not found")
     
     # Verificar que la categoría pertenece a la empresa del empleado
-    if category.enterprise_id != current_employee.enterprise_id:
+    if category.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para eliminar esta categoría"
