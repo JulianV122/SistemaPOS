@@ -3,13 +3,15 @@ interface ButtonSecondaryProps {
     text: string;
     onClick?: () => void;
     customClasses?: string;
+    disabled?: boolean;
 }
 
-export function ButtonSecondary({ text, onClick, customClasses = "" }: ButtonSecondaryProps) {
+export function ButtonSecondary({ text, onClick, customClasses = "", disabled }: ButtonSecondaryProps) {
     return (
         <button 
+            className={`${buttonSecondary} ${customClasses}`} 
             onClick={onClick}
-            className={`${buttonSecondary} ${customClasses}`}
+            disabled={disabled}
         >
             {text}
         </button>

@@ -1,40 +1,58 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { factura } from "@/public";
 import { ButtonPrimary, ButtonSecondary } from "@/components";
 import { PermissionAuth } from "@/components";
+import { productService, type Product } from "@/services/api/product";
+import { saleService, type SaleCreate } from "@/services/api/sale";
+import { showAlert } from "@/components/atoms/Alert";
 
+interface CartProduct extends Product {
+    quantity: number;
+}
 
 export default function Cash() {
-    const products = [
-        { id: 1, name: "Producto 1", price: "$10", category: "Electrónica" },
-        { id: 2, name: "Producto 2", price: "$15", category: "Hogar" },
-        { id: 3, name: "Producto 3", price: "$20", category: "Electrónica" },
-        { id: 4, name: "Producto 4", price: "$25", category: "Ropa" },
-        { id: 5, name: "Producto 5", price: "$30", category: "Hogar" },
-        { id: 6, name: "Producto 6", price: "$35", category: "Electrónica" },
-        { id: 7, name: "Producto 7", price: "$40", category: "Ropa" },
-        { id: 8, name: "Producto 8", price: "$45", category: "Hogar" },
-        { id: 9, name: "Producto 9", price: "$50", category: "Electrónica" },
-        { id: 10, name: "Producto 10", price: "$55", category: "Ropa" },
-        { id: 11, name: "Producto 11", price: "$60", category: "Hogar" },
-        { id: 12, name: "Producto 12", price: "$65", category: "Electrónica" },
-    ];
-
-    const [addedProducts, setAddedProducts] = useState<
-        { id: number; name: string; price: string; category: string }[]
-    >([]);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
     const [modalType, setModalType] = useState("");
     const [searchValue, setSearchValue] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState(products);
-    const [foundProduct, setFoundProduct] = useState<
-        { id: number; name: string; price: string; category: string } | null
-    >(null);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [foundProduct, setFoundProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(false);
 
-    const handleAddProduct = (product: { id: number; name: string; price: string; category: string }) => {
-        setAddedProducts([...addedProducts, product]);
+    useEffect(() => {
+        loadProducts();
+    }, []);
+
+    const loadProducts = async () => {
+        try {
+            setLoading(true);
+            const data = await productService.getAll(0, 100);
+            setProducts(data);
+            setFilteredProducts(data);
+        } catch (error) {
+            showAlert({ message: "Error al cargar los productos", type: "error" });
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleAddProduct = (product: Product) => {
+        setCartProducts(prev => {
+            const existingProduct = prev.find(p => p.id === product.id);
+            if (existingProduct) {
+                return prev.map(p => 
+                    p.id === product.id 
+                        ? { ...p, quantity: p.quantity + 1 }
+                        : p
+                );
+            }
+            return [...prev, { ...product, quantity: 1 }];
+        });
+        showAlert({ message: `${product.name} añadido al carrito`, type: "success" });
     };
 
     const handleModalClose = () => {
@@ -45,29 +63,73 @@ export default function Cash() {
     };
 
     const handleNameSearch = () => {
-        const filtered = products.find((product) =>
-            product.name.toLowerCase() === searchValue.toLowerCase()
-        );
-
-        if (filtered) {
-            setFoundProduct(filtered);
-            setModalType("resultadoBusqueda"); // Cambia al modal de resultado
-        } else {
-            alert("Producto no encontrado");
-        }
-    };
-
-    const handleCategorySearch = () => {
         const filtered = products.filter((product) =>
-            product.category.toLowerCase().includes(searchValue.toLowerCase())
+            product.name.toLowerCase().includes(searchValue.toLowerCase())
         );
 
         if (filtered.length > 0) {
             setFilteredProducts(filtered);
             setModalType("resultadoCategoria");
         } else {
-            alert("No se encontraron productos en esta categoría");
+            showAlert({ message: "No se encontraron productos", type: "error" });
         }
+    };
+
+    const handleCategorySearch = async () => {
+        try {
+            setLoading(true);
+            // Assuming we have categories loaded somewhere
+            // For now, we'll just filter by category name in the products
+            const filtered = products.filter((product) =>
+                product.description.toLowerCase().includes(searchValue.toLowerCase())
+            );
+
+            if (filtered.length > 0) {
+                setFilteredProducts(filtered);
+                setModalType("resultadoCategoria");
+            } else {
+                showAlert({ message: "No se encontraron productos en esta categoría", type: "error" });
+            }
+        } catch (error) {
+            showAlert({ message: "Error al buscar productos", type: "error" });
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleCompleteSale = async () => {
+        if (cartProducts.length === 0) {
+            showAlert({ message: "El carrito está vacío", type: "error" });
+            return;
+        }
+
+        try {
+            setLoading(true);
+            const saleData: SaleCreate = {
+                products: cartProducts.map(product => ({
+                    product_id: product.id,
+                    quantity: product.quantity,
+                    price: product.public_price
+                }))
+            };
+
+            await saleService.create(saleData);
+            showAlert({ message: "Venta realizada con éxito", type: "success" });
+            setCartProducts([]);
+            handleModalClose();
+        } catch (error) {
+            showAlert({ message: "Error al procesar la venta", type: "error" });
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const calculateTotal = () => {
+        return cartProducts.reduce((total, product) => 
+            total + (product.public_price * product.quantity), 0
+        );
     };
 
     return (
@@ -75,28 +137,36 @@ export default function Cash() {
             <div className="w-full h-screen flex p-4">
                 {/* Contenedor de productos */}
                 <div className="flex-grow grid grid-cols-4 gap-4 overflow-y-auto h-4/5 bg-cyan-800 p-6 rounded-md">
-                    {products.map((product) => (
-                        <div
-                            key={product.id}
-                            className="border p-4 flex flex-col items-center bg-white rounded shadow-md"
-                        >
-                            <Image
-                                src={factura}
-                                alt="Factura"
-                                className="w-16 h-16"
-                            />
-                            <h2 className="mt-2 text-lg text-black font-bold">
-                                {product.name}
-                            </h2>
-                            <p className="text-gray-600">{product.price}</p>
-                            <p className="text-gray-500">{product.category}</p>
-                            <ButtonPrimary
-                                text="Añadir Producto"
-                                onClick={() => handleAddProduct(product)}
-                            />
+                    {loading ? (
+                        <div className="col-span-4 flex justify-center items-center">
+                            <p className="text-white">Cargando productos...</p>
                         </div>
-                    ))}
+                    ) : (
+                        products.map((product) => (
+                            <div
+                                key={product.id}
+                                className="border p-4 flex flex-col items-center bg-white rounded shadow-md"
+                            >
+                                <Image
+                                    src={factura}
+                                    alt="Factura"
+                                    className="w-16 h-16"
+                                />
+                                <h2 className="mt-2 text-lg text-black font-bold">
+                                    {product.name}
+                                </h2>
+                                <p className="text-gray-600">${product.public_price}</p>
+                                <p className="text-gray-500">Stock: {product.stock}</p>
+                                <ButtonPrimary
+                                    text="Añadir Producto"
+                                    onClick={() => handleAddProduct(product)}
+                                    disabled={product.stock <= 0}
+                                />
+                            </div>
+                        ))
+                    )}
                 </div>
+
                 {/* Contenedor de botones */}
                 <div className="flex flex-col space-y-4 ml-4 w-1/6 mt-5 justify-start">
                     <ButtonSecondary
@@ -114,6 +184,7 @@ export default function Cash() {
                     <ButtonSecondary
                         text="Pagar"
                         onClick={() => setModalType("pagar")}
+                        disabled={cartProducts.length === 0}
                     />
                 </div>
 
@@ -177,68 +248,37 @@ export default function Cash() {
                                 </>
                             )}
 
-                            {/* Modal de resultado de búsqueda por nombre */}
-                            {modalType === "resultadoBusqueda" && foundProduct && (
-                                <>
-                                    <h2 className="text-lg text-black font-bold mb-4">
-                                        Producto Encontrado
-                                    </h2>
-                                    <div className="border p-4 flex flex-col items-center bg-gray-100 rounded shadow-md">
-                                        <Image
-                                            src={factura}
-                                            alt="Factura"
-                                            className="w-16 h-16"
-                                        />
-                                        <h2 className="mt-2 text-lg text-black font-bold">
-                                            {foundProduct.name}
-                                        </h2>
-                                        <p className="text-gray-600">
-                                            {foundProduct.price}
-                                        </p>
-                                        <p className="text-gray-500">
-                                            {foundProduct.category}
-                                        </p>
-                                        <ButtonPrimary
-                                            text="Añadir Producto"
-                                            onClick={() => handleAddProduct(foundProduct)}
-                                        />
-                                    </div>
-                                    <div className="flex justify-end mt-4">
-                                        <ButtonSecondary
-                                            text="Cerrar"
-                                            onClick={handleModalClose}
-                                        />
-                                    </div>
-                                </>
-                            )}
-
-                            {/* Modal de resultados por categoría */}
+                            {/* Modal de resultados de búsqueda */}
                             {modalType === "resultadoCategoria" && (
                                 <>
                                     <h2 className="text-lg text-black font-bold mb-4">
-                                        Productos por Categoría
+                                        Productos Encontrados
                                     </h2>
-                                    <ul className="space-y-2">
-                                        {filteredProducts.map((product) => (
-                                            <li
-                                                key={product.id}
-                                                className="flex justify-between items-center border-b py-2 text-black"
-                                            >
-                                                <div>
-                                                    <p className="font-bold">
-                                                        {product.name}
-                                                    </p>
-                                                    <p>{product.price}</p>
-                                                </div>
-                                                <ButtonPrimary
-                                                    text="Añadir"
-                                                    onClick={() =>
-                                                        handleAddProduct(product)
-                                                    }
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="max-h-96 overflow-y-auto">
+                                        <ul className="space-y-2">
+                                            {filteredProducts.map((product) => (
+                                                <li
+                                                    key={product.id}
+                                                    className="flex justify-between items-center border-b py-2 text-black"
+                                                >
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            {product.name}
+                                                        </p>
+                                                        <p>${product.public_price}</p>
+                                                        <p>Stock: {product.stock}</p>
+                                                    </div>
+                                                    <ButtonPrimary
+                                                        text="Añadir"
+                                                        onClick={() =>
+                                                            handleAddProduct(product)
+                                                        }
+                                                        disabled={product.stock <= 0}
+                                                    />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                     <div className="flex justify-end mt-4">
                                         <ButtonSecondary
                                             text="Cerrar"
@@ -254,21 +294,31 @@ export default function Cash() {
                                     <h2 className="text-lg text-black font-bold mb-4">
                                         Resumen de Venta
                                     </h2>
-                                    <ul className="space-y-2">
-                                        {addedProducts.map((product, index) => (
-                                            <li
-                                                key={index}
-                                                className="flex justify-between border-b py-2 text-black"
-                                            >
-                                                <div>
-                                                    <p className="font-bold">
-                                                        {product.name}
-                                                    </p>
-                                                    <p>{product.price}</p>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="max-h-96 overflow-y-auto">
+                                        <ul className="space-y-2">
+                                            {cartProducts.map((product) => (
+                                                <li
+                                                    key={product.id}
+                                                    className="flex justify-between border-b py-2 text-black"
+                                                >
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            {product.name}
+                                                        </p>
+                                                        <p>${product.public_price} x {product.quantity}</p>
+                                                        <p className="font-semibold">
+                                                            Total: ${product.public_price * product.quantity}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="mt-4 border-t pt-4">
+                                        <p className="text-xl font-bold text-black">
+                                            Total: ${calculateTotal()}
+                                        </p>
+                                    </div>
                                     <div className="flex justify-end mt-4">
                                         <ButtonSecondary
                                             text="Cerrar"
@@ -282,15 +332,21 @@ export default function Cash() {
                             {modalType === "pagar" && (
                                 <>
                                     <h2 className="text-lg text-black font-bold mb-4">
-                                        Opciones de Pago
+                                        Confirmar Pago
                                     </h2>
+                                    <p className="text-black mb-4">
+                                        Total a pagar: ${calculateTotal()}
+                                    </p>
                                     <div className="flex flex-col space-y-4">
-                                        <ButtonPrimary text="Efectivo" />
-                                        <ButtonPrimary text="Pago con Tarjeta" />
+                                        <ButtonPrimary 
+                                            text="Confirmar Venta" 
+                                            onClick={handleCompleteSale}
+                                            disabled={loading}
+                                        />
                                     </div>
                                     <div className="flex justify-end mt-4">
                                         <ButtonSecondary
-                                            text="Cerrar"
+                                            text="Cancelar"
                                             onClick={handleModalClose}
                                         />
                                     </div>
