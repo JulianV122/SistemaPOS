@@ -11,6 +11,10 @@ import empresa3 from './empresa3.png';
 import factura from './factura.png';
 import recompensa from './recompensa.png';
 import aprobado from './aprobado.png';
+import equipoTrabajo from './equipoTrabajo.jpg';
+import soporteTecnico from './Soporte-tecnico.png';
+import ayudar from './ayudar.png';
+import apoyoTecnico from './apoyo-tecnico.png';
 
 
-export { logo, logoFacebook, logoInstagram, logoTwitter, logoLinkedin, backgroundLandingImage, empresa1, empresa2, empresa3, factura, recompensa, aprobado, logoBlanco };
+export { logo, logoFacebook, logoInstagram, logoTwitter, logoLinkedin, backgroundLandingImage, empresa1, empresa2, empresa3, factura, recompensa, aprobado, logoBlanco, equipoTrabajo, soporteTecnico, ayudar, apoyoTecnico };
