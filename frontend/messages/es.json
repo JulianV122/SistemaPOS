@@ -131,10 +131,55 @@
     "ButtonDelete": {
         "text": "Eliminar"
     },
-    "ButtonEdit":{
+    "ButtonEdit": {
         "text": "Editar"
     },
     "AuthRedirect": {
         "redirectMessage": "Ya estas logueado, redirigiendo al dashboard..."
+    },
+    "RegisterEnterprise": {
+        "name": "Nombre",
+        "namePlaceholder": "Ingresa tu nombre",
+        "nameError": "El campo nombre es inválido",
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "Ingresa tu correo electrónico",
+        "emailRequired": "Este campo es requerido",
+        "emailError": "El campo email es inválido",
+        "number": "Número",
+        "numberPlaceholder": "Ingresa tu número",
+        "numberError": "El campo número es inválido",
+        "city": "Ciudad",
+        "cityPlaceholder": "Ingresa tu ciudad",
+        "cityError": "El campo ciudad es inválido",
+        "registerButton": "Registrarse",
+        "nit": "Nit",
+        "nitPlaceholder": "Enter your Nit",
+        "nitError": "Nit is required"
+    },
+    "Plans": {
+        "choosePlan": "Elige tu plan",
+        "hirePlan": "Contratar Plan",
+        "paymentDetails": "Detalles del Pago",
+        "processingPayment": "Procesando el pago...",
+        "paymentSuccess": "Pago realizado con éxito",
+        "close": "Cerrar",
+        "cardNumber": "Número de Tarjeta",
+        "cardNumberPlaceholder": "Ingresa el número de tu tarjeta",
+        "expiryDate": "Fecha de Expiración",
+        "expiryDatePlaceholder": "MM/AA",
+        "payNow": "Pagar Ahora",
+        "cancel": "Cancelar",
+        "basicPlan": {
+            "title": "Basic Plan",
+            "description": "Ideal for small stores."
+        },
+        "intermediatePlan": {
+            "title": "Intermediate Plan",
+            "description": "Perfect for medium-sized supermarkets."
+        },
+        "advancedPlan": {
+            "title": "Advanced Plan",
+            "description": "Designed for large supermarket chains."
+        }
     }
 }
