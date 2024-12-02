@@ -5,14 +5,14 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     webpack: (config) => {
-      config.watchOptions = {
-        poll: 1000,   // Revisa cambios cada segundo
-        aggregateTimeout: 300,   // Espera 300ms después del último cambio
-      }
-      return config
+        config.watchOptions = {
+            poll: 1000,
+            aggregateTimeout: 300,
+            ignored: ['**/node_modules', '**/.git', '**/.next'],
+        }
+        return config
     },
     output: 'standalone',
-    // Otras configuraciones que puedas tener...
-  }
+}
 
 export default withNextIntl(nextConfig);

@@ -7,6 +7,7 @@ class EmployeeBase(SQLModel):
     email: EmailStr = Field(max_length=100)
     code: str = Field(max_length=45)
     lastname: str = Field(max_length=100)
+    telephone: str = Field(max_length=20)
 
 class Employee(EmployeeBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -23,11 +24,7 @@ class EmployeeCreate(EmployeeBase):
     enterprise_id: int
     role_id: int
 
-class EmployeeRead(EmployeeBase):
-    id: int
-    enterprise_id: int
-    role_id: int
-    is_active: bool
+
 
 class EmployeeUpdate(SQLModel):
     name: Optional[str] = None
@@ -37,3 +34,32 @@ class EmployeeUpdate(SQLModel):
     password: Optional[str] = None
     is_active: Optional[bool] = None
     role_id: Optional[int] = None
+    telephone: Optional[str] = None
+
+class EmployeeUpdateMe(SQLModel):
+    name: Optional[str] = None
+    lastname: Optional[str] = None
+    telephone: Optional[str] = None
+
+class EnterpriseInfo(SQLModel):
+    id: int
+    name: str
+    NIT: str
+
+class PermissionInfo(SQLModel):
+    id: int
+    name: str
+    description: str
+
+class RoleInfo(SQLModel):
+    id: int
+    name: str
+    description: str
+    permissions: List[PermissionInfo]
+
+
+class EmployeeRead(EmployeeBase):
+    id: int
+    is_active: bool
+    enterprise: EnterpriseInfo
+    role: RoleInfo

@@ -4,7 +4,6 @@ from sqlmodel import select
 from src.crud import category as crud
 from src.deps import SessionDep, get_current_active_employee
 from src.models.category import Category, CategoryCreate, CategoryRead
-from src.models.product import ProductRead
 from src.models.employee import Employee
 from src.models.utils import Message
 
@@ -20,7 +19,12 @@ def read_categories(
     """
     Retrieve categories.
     """
-    categories = crud.get_multi(session=session, skip=skip, limit=limit)
+    categories = crud.get_by_enterprise(
+        session=session,
+        enterprise_id=current_employee.enterprise_id,
+        skip=skip,
+        limit=limit
+    )
     return categories
 
 @router.post("/", response_model=CategoryRead)
@@ -33,15 +37,10 @@ def create_category(
     """
     Create new category.
     """
-    # Verificar si ya existe una categoría con el mismo nombre
-    category = crud.get_by_name(session=session, name=category_in.name)
-    if category:
-        raise HTTPException(
-            status_code=400,
-            detail="A category with this name already exists.",
-        )
+    # Asignar la empresa del empleado actual
+    category_in.enterprise_id = current_employee.enterprise_id
     
-    category = crud.category.create(session=session, obj_in=category_in)
+    category = crud.create(session=session, obj_in=category_in)
     return category
 
 @router.get("/{category_id}", response_model=CategoryRead)
@@ -57,20 +56,40 @@ def read_category(
     category = crud.get(session=session, id=category_id)
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
+    
+    # Verificar que la categoría pertenece a la empresa del empleado
+    if category.enterprise_id != current_employee.enterprise_id:
+        raise HTTPException(
+            status_code=403,
+            detail="No tienes permiso para ver esta categoría"
+        )
+    
     return category
 
-@router.get("/{category_id}/products", response_model=List[ProductRead])
-def read_category_products(
+@router.put("/{category_id}", response_model=CategoryRead)
+def update_category(
     *,
     session: SessionDep,
     category_id: int,
+    category_in: CategoryCreate,
     current_employee: Employee = Depends(get_current_active_employee)
 ) -> Any:
     """
-    Get products for a category.
+    Update category.
     """
-    products = crud.get_products(session=session, category_id=category_id)
-    return products
+    category = crud.get(session=session, id=category_id)
+    if not category:
+        raise HTTPException(status_code=404, detail="Category not found")
+    
+    # Verificar que la categoría pertenece a la empresa del empleado
+    if category.enterprise_id != current_employee.enterprise_id:
+        raise HTTPException(
+            status_code=403,
+            detail="No tienes permiso para actualizar esta categoría"
+        )
+    
+    category = crud.update(session=session, db_obj=category, obj_in=category_in)
+    return category
 
 @router.delete("/{category_id}", response_model=Message)
 def delete_category(
@@ -86,13 +105,13 @@ def delete_category(
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
     
-    # Verificar si la categoría tiene productos
-    if category.products:
+    # Verificar que la categoría pertenece a la empresa del empleado
+    if category.enterprise_id != current_employee.enterprise_id:
         raise HTTPException(
-            status_code=400,
-            detail="Cannot delete category with associated products"
+            status_code=403,
+            detail="No tienes permiso para eliminar esta categoría"
         )
     
     crud.remove(session=session, id=category_id)
-    return Message(message="Category deleted successfully")
+    return Message(message="Categoría eliminada exitosamente")
 

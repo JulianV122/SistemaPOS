@@ -13,7 +13,7 @@ export function ServiceCard({ title, description, price,onHireClick }: ServiceCa
     const t = useTranslations('ServiceCard');
 
     return (
-        <article className="max-w-xs rounded overflow-hidden shadow-lg m-4">
+        <article className="max-w-xs rounded overflow-hidden border-1 border-cyan-700 shadow-cyan-700 shadow-lg m-4">
             <div className="px-4 py-16 flex flex-col items-center">
                 <div className="font-bold text-3xl mb-4">{title}</div>
                 <p className="text-gray-700 text-center">{description}</p>

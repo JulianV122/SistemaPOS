@@ -31,7 +31,7 @@ export function HomeNavbar() {
                 </div>
 
                 <div className="hidden lg:flex items-center gap-4">
-                    <div className="flex items-center gap-2 p-2 bg-white text-black rounded-full">
+                    <div className="flex items-center gap-2 p-2 border text-black rounded-full">
                         <span className="text-xl">🌎</span>
                         <div className="flex items-center">
                             <Link href={`/${pathname}`} locale="en" className="text-black hover:underline px-2">EN</Link>
@@ -56,7 +56,7 @@ export function HomeNavbar() {
                     )}
                 </div>
                 <button
-                    className="lg:hidden flex items-center text-white"
+                    className="lg:hidden flex items-center text-black"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     <svg

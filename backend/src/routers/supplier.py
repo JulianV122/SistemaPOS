@@ -4,7 +4,6 @@ from sqlmodel import select
 from src.crud import supplier as crud
 from src.deps import SessionDep, get_current_active_employee
 from src.models.supplier import Supplier, SupplierCreate, SupplierRead
-from src.models.product import ProductRead
 from src.models.employee import Employee
 from src.models.utils import Message
 
@@ -20,7 +19,12 @@ def read_suppliers(
     """
     Retrieve suppliers.
     """
-    suppliers = crud.get_multi(session=session, skip=skip, limit=limit)
+    suppliers = crud.get_by_enterprise(
+        session=session,
+        enterprise_id=current_employee.enterprise.id,
+        skip=skip,
+        limit=limit
+    )
     return suppliers
 
 @router.post("/", response_model=SupplierRead)
@@ -33,20 +37,19 @@ def create_supplier(
     """
     Create new supplier.
     """
-    # Verificar si ya existe un proveedor con el mismo NIT
-    supplier = crud.get_by_nit(session=session, nit=supplier_in.NIT)
-    if supplier:
-        raise HTTPException(
-            status_code=400,
-            detail="A supplier with this NIT already exists.",
-        )
+    # Asignar la empresa del empleado actual
+    supplier_in.enterprise_id = current_employee.enterprise_id
     
-    # Verificar si ya existe un proveedor con el mismo email
-    supplier = crud.get_by_email(session=session, email=supplier_in.email)
-    if supplier:
+    # Verificar si ya existe un proveedor con el mismo NIT en la misma empresa
+    existing_supplier = crud.get_by_nit_and_enterprise(
+        session=session,
+        nit=supplier_in.NIT,
+        enterprise_id=current_employee.enterprise_id
+    )
+    if existing_supplier:
         raise HTTPException(
             status_code=400,
-            detail="A supplier with this email already exists.",
+            detail="Ya existe un proveedor con este NIT en tu empresa"
         )
     
     supplier = crud.create(session=session, obj_in=supplier_in)
@@ -64,21 +67,41 @@ def read_supplier(
     """
     supplier = crud.get(session=session, id=supplier_id)
     if not supplier:
-        raise HTTPException(status_code=404, detail="Supplier not found")
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    
+    # Verificar que el proveedor pertenece a la empresa del empleado
+    if supplier.enterprise_id != current_employee.enterprise_id:
+        raise HTTPException(
+            status_code=403,
+            detail="No tienes permiso para ver este proveedor"
+        )
+    
     return supplier
 
-@router.get("/{supplier_id}/products", response_model=List[ProductRead])
-def read_supplier_products(
+@router.put("/{supplier_id}", response_model=SupplierRead)
+def update_supplier(
     *,
     session: SessionDep,
     supplier_id: int,
+    supplier_in: SupplierCreate,
     current_employee: Employee = Depends(get_current_active_employee)
 ) -> Any:
     """
-    Get products for a supplier.
+    Update supplier.
     """
-    products = crud.get_products(session=session, supplier_id=supplier_id)
-    return products
+    supplier = crud.get(session=session, id=supplier_id)
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    
+    # Verificar que el proveedor pertenece a la empresa del empleado
+    if supplier.enterprise_id != current_employee.enterprise_id:
+        raise HTTPException(
+            status_code=403,
+            detail="No tienes permiso para actualizar este proveedor"
+        )
+    
+    supplier = crud.update(session=session, db_obj=supplier, obj_in=supplier_in)
+    return supplier
 
 @router.delete("/{supplier_id}", response_model=Message)
 def delete_supplier(
@@ -92,14 +115,14 @@ def delete_supplier(
     """
     supplier = crud.get(session=session, id=supplier_id)
     if not supplier:
-        raise HTTPException(status_code=404, detail="Supplier not found")
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
     
-    # Verificar si el proveedor tiene productos
-    if supplier.products:
+    # Verificar que el proveedor pertenece a la empresa del empleado
+    if supplier.enterprise_id != current_employee.enterprise_id:
         raise HTTPException(
-            status_code=400,
-            detail="Cannot delete supplier with associated products"
+            status_code=403,
+            detail="No tienes permiso para eliminar este proveedor"
         )
     
     crud.remove(session=session, id=supplier_id)
-    return Message(message="Supplier deleted successfully")
+    return Message(message="Proveedor eliminado exitosamente")

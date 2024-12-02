@@ -3,14 +3,15 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 import { ButtonPrimary } from '@/components';
 import { useRouter } from '@/i18n/routing';
-import { useForm, SubmitHandler } from "react-hook-form";
-import { loginUser, getCurrentUser } from '@/services/auth';
+
+import { backgroundLandingImage } from "@/public";
+import Image from 'next/image';
+import { useForm, SubmitHandler } from "react-hook-form"
+import { loginUser } from '@/services/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '@/validators/loginSchema';
 import { useUserSession } from '@/store/userSession';
-import { HomeNavbar } from '@/components';
-import { backgroundLandingImage } from "@/public";
-import Image from 'next/image';
+import { showAlert } from '@/components/atoms/Alert';
 
 type Inputs = {
     email: string,
@@ -20,6 +21,7 @@ type Inputs = {
 export function Login() {
     const t = useTranslations('Login');
     const { setUser } = useUserSession();
+    const router = useRouter();
 
     const {
         register,
@@ -32,12 +34,19 @@ export function Login() {
     const router = useRouter();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data);
-        await loginUser(data.email, data.password);
-        const user = await getCurrentUser();
-        console.log(user);
-
-        router.push('/dashboard');
+        try {
+            await loginUser(data.email, data.password);
+            showAlert({
+                type: 'success',
+                message: '¡Sesión iniciada correctamente!'
+            });
+            router.push('/dashboard');
+        } catch (error: any) {
+            showAlert({
+                type: 'error',
+                message: error.response?.data?.detail || 'Error al iniciar sesión'
+            });
+        }
     };
 
     return (
@@ -87,6 +96,6 @@ export function Login() {
                     </div>
                 </div>
             </div>
-        </div>
+      </div>
     );
 }

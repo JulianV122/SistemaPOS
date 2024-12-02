@@ -1,25 +1,38 @@
 {
     "LandingPage": {
-        "subtitle": "POS systems for all types of supermarkets and stores",
+        "headerLanding": "POS point of sale software",
+        "titleLanding" : "Identification, email and ready!",
+        "blueTitle": "Your POS system",
+        "blackTitle": "Easy and fast",
+        "subtitle": "With our POS system for all types of supermarkets and stores, manage your sales efficiently and securely.",
         "welcome": "Welcome to POSCO",
         "description": "POSCO specializes in the sale of POS (Point of Sale) systems. We offer a SaaS service with different plans tailored to the needs of supermarkets and stores of all sizes.",
         "servicePlans": "Service Plans",
+        "buttonStart": "Start Now",
+        "advantages": {
+            "bill": "Fast invoices",
+            "billDescription": "With our POS system you can generate fast and efficient invoices for your customers.",
+            "price": "Excellent price",
+            "priceDescription": "With our plans you can acquire your POS system at a good price regardless of the size of your store.",
+            "easy": "Easy administration",
+            "easyDescription": "Our POS system is easy to use and manage, you don't need to be a technology expert to use it."
+        },
         "basicPlan": {
             "title": "Basic Plan",
-            "description": "Ideal for small stores."
+            "description": "The ideal plan for small shops and restaurants."
         },
         "intermediatePlan": {
             "title": "Intermediate Plan",
-            "description": "Perfect for medium-sized supermarkets."
+            "description": "Perfect for supermarkets and medium-sized restaurants."
         },
         "advancedPlan": {
             "title": "Advanced Plan",
-            "description": "Designed for large supermarket chains."
+            "description": "Designed for large supermarket chains and restaurants."
         },
-        "clientTestimonials": "Client Testimonials",
-        "testimonial1": "\"POSCO has transformed the way we handle our sales.\" - Client A",
-        "testimonial2": "\"The best POS system we have ever used.\" - Client B",
-        "testimonial3": "\"Excellent service and support.\" - Client C",
+        "clientTestimonials": "Opinions of our clients",
+        "testimonial1": "\"POSCO has transformed the way we manage our sales.\" - Fruver Market",
+        "testimonial2": "\"The best POS system we have ever used, it is very efficient and we see it reflected every day.\" - Maxi Fruver",
+        "testimonial3": "\"Everything we expect from a POS system: secure, reliable and fast.\" - Caribe Supermercados",
         "recommendedBy": "Companies that recommend us"
     },
     "Register": {
@@ -184,6 +197,21 @@
             "title": "Advanced Plan",
             "description": "Designed for large supermarket chains."
         }
-
+    "About": {
+        "titleBlue": "We are a team",
+        "title": "dedicated to creating POS systems for supermarkets and stores.",
+        "description": "POSCO is a company dedicated to creating POS systems for supermarkets and stores. Our goal is to offer an easy-to-use and efficient POS system for all types of stores. Our team is made up of technology and sales experts, which allows us to offer a high-quality POS system tailored to the needs of our customers.",
+        "vision": "| Our Vision",
+        "mision": "| Our Mission",
+        "visionDescription": "To be the leading company in creating POS systems for supermarkets and stores in Latin America.",
+        "misionDescription": "To offer an easy-to-use and efficient POS system for all types of stores, with the aim of improving sales management and increasing the productivity of our customers."
+    },
+    "Contact": {
+        "title": "Do you have any questions?",
+        "subtitle": "We are here to help you. If you have any questions or concerns, do not hesitate to contact us.",
+        "support": "Find out the best product to boost your business",
+        "call": "Call 310 123 8123",
+        "chat": "Solve your doubts in seconds",
+        "contactSupport": "Contact support"
     }
 }

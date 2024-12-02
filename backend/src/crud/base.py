@@ -1,6 +1,7 @@
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
-from sqlmodel import SQLModel, Session, select
+from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
+from sqlmodel import Session, SQLModel, select
 
 ModelType = TypeVar("ModelType", bound=SQLModel)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=SQLModel)
@@ -8,6 +9,12 @@ UpdateSchemaType = TypeVar("UpdateSchemaType", bound=SQLModel)
 
 class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def __init__(self, model: Type[ModelType]):
+        """
+        CRUD object with default methods to Create, Read, Update, Delete (CRUD).
+        **Parameters**
+        * `model`: A SQLModel class
+        * `schema`: A Pydantic model (schema) class
+        """
         self.model = model
 
     def get(self, session: Session, id: Any) -> Optional[ModelType]:
@@ -17,6 +24,14 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self, session: Session, *, skip: int = 0, limit: int = 100
     ) -> List[ModelType]:
         statement = select(self.model).offset(skip).limit(limit)
+        return session.exec(statement).all()
+
+    def get_by_enterprise(
+        self, session: Session, *, enterprise_id: int, skip: int = 0, limit: int = 100
+    ) -> List[ModelType]:
+        statement = select(self.model).where(
+            self.model.enterprise_id == enterprise_id
+        ).offset(skip).limit(limit)
         return session.exec(statement).all()
 
     def create(self, session: Session, *, obj_in: CreateSchemaType) -> ModelType:
@@ -32,7 +47,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         session: Session,
         *,
         db_obj: ModelType,
-        obj_in: UpdateSchemaType | Dict[str, Any]
+        obj_in: Union[UpdateSchemaType, Dict[str, Any]]
     ) -> ModelType:
         obj_data = jsonable_encoder(db_obj)
         if isinstance(obj_in, dict):

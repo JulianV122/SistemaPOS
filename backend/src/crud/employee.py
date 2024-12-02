@@ -30,6 +30,7 @@ class CRUDEmployee(CRUDBase[Employee, EmployeeCreate, EmployeeUpdate]):
             name=obj_in.name,
             lastname=obj_in.lastname,
             code=obj_in.code,
+            telephone=obj_in.telephone,
             enterprise_id=obj_in.enterprise_id,
             role_id=obj_in.role_id,
             is_active=True
