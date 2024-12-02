@@ -9,17 +9,19 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <UserAuth>
-        <div className="flex h-screen">            
+        <>
+        {/* <UserAuth> */}
+        <div className="flex h-full bg-white">            
             <NavDashboard/>
-            <div className="flex-grow bg-gray-100">
-                <HeaderDashboard/>
-                <div className="p-4">
-                    {children}
-                </div>
+            <div className="flex-grow ">
+            <HeaderDashboard/>
+            <div className="p-4 ">
+                {children}
+            </div>
             </div>
         </div>
-        </UserAuth>
+        {/* </UserAuth> */}
+        </>
     );
 }
 
