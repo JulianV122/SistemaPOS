@@ -15,16 +15,16 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     DOMAIN: str = "localhost"
 
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str
-    POSTGRES_PORT: int
-    POSTGRES_HOST: str
+    MYSQL_USER: str
+    MYSQL_PASSWORD: str = ""
+    MYSQL_DB: str
+    MYSQL_PORT: int
+    MYSQL_HOST: str
 
     @computed_field
     @property
     def MYSQL_URI(self) -> str:
-        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        return f"mysql+pymysql://{self.MYSQL_USER}:{self.MYSQL_PASSWORD}@{self.MYSQL_HOST}:{self.MYSQL_PORT}/{self.MYSQL_DB}"
 
     BACKEND_CORS_ORIGINS: list = [
         "http://localhost:3000", 
@@ -54,6 +54,9 @@ class Settings(BaseSettings):
     FIRST_ENTERPRISE_NIT: str
     FIRST_ENTERPRISE_EMAIL: str
     FIRST_ENTERPRISE_PHONE: str
+    
+    # Expo Push Notifications
+    EXPO_TOKEN: str = ""
 
 
 settings = Settings()

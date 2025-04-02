@@ -70,7 +70,7 @@ def read_supplier(
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
     
     # Verificar que el proveedor pertenece a la empresa del empleado
-    if supplier.enterprise_id != current_employee.enterprise_id:
+    if supplier.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para ver este proveedor"
@@ -94,7 +94,7 @@ def update_supplier(
         raise HTTPException(status_code=404, detail="Proveedor no encontrado")
     
     # Verificar que el proveedor pertenece a la empresa del empleado
-    if supplier.enterprise_id != current_employee.enterprise_id:
+    if supplier.enterprise_id != current_employee.enterprise.id:
         raise HTTPException(
             status_code=403,
             detail="No tienes permiso para actualizar este proveedor"

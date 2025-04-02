@@ -12,6 +12,7 @@ from src.routers.product import router as product_router
 from src.routers.client import router as client_router
 from src.routers.invoice import router as invoice_router
 from src.routers.sale import router as sale_router
+from src.routers.notification import router as notification_router
 
 from src.config.settings import settings
 
@@ -42,6 +43,7 @@ app.include_router(product_router, prefix=f"{settings.API_V1_STR}/products", tag
 app.include_router(client_router, prefix=f"{settings.API_V1_STR}/clients", tags=["clients"])
 app.include_router(invoice_router, prefix=f"{settings.API_V1_STR}/invoices", tags=["invoices"])
 app.include_router(sale_router, prefix=f"{settings.API_V1_STR}/sales", tags=["sales"])
+app.include_router(notification_router, prefix=f"{settings.API_V1_STR}/notifications", tags=["notifications"])
 
 @app.get("/")
 def read_root():

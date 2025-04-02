@@ -18,6 +18,7 @@ class Employee(EmployeeBase, table=True):
     
     enterprise: Optional["Enterprise"] = Relationship(back_populates="employees")
     role: Optional["Role"] = Relationship(back_populates="employees")
+    notification_tokens: List["NotificationToken"] = Relationship(back_populates="user")
 
 class EmployeeCreate(EmployeeBase):
     password: str

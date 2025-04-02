@@ -40,7 +40,7 @@ class UpdatePassword(SQLModel):
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     hashed_password: str
-    items: list["Item"] = Relationship(back_populates="owner") # type: ignore
+    notification_tokens: list["NotificationToken"] = Relationship(back_populates="user") # type: ignore
 
 
 # Properties to return via API, id is always required
